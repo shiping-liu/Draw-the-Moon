@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>中秋画月挑战</title>
   <style>
     * {
@@ -16,36 +16,43 @@
       background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
       color: #f6e58d;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      min-height: 100vh;
+      /* 优先使用现代动态视口高度 dvh，回退兼容 vh */
+      height: 100vh;
+      height: 100dvh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 16px;
+      /* 适配 iPhone 刘海与 Android 底部小白条安全区 */
+      padding: max(12px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom)) 16px;
+      overflow: hidden;
       touch-action: none;
     }
     header {
       text-align: center;
-      margin-top: 10px;
+      flex-shrink: 0;
     }
     header h1 {
-      font-size: 1.4rem;
+      font-size: clamp(1.1rem, 4.5vw, 1.4rem);
       letter-spacing: 2px;
       color: #ffeaa7;
       text-shadow: 0 0 10px rgba(255, 234, 167, 0.5);
     }
     header p {
-      font-size: 0.85rem;
+      font-size: clamp(0.75rem, 3.2vw, 0.85rem);
       color: #b2bec3;
-      margin-top: 4px;
+      margin-top: 3px;
     }
     #canvas-container {
       position: relative;
-      width: 90vw;
-      height: 90vw;
-      max-width: 360px;
-      max-height: 360px;
-      margin: auto;
+      /* 核心自适应：宽度与高度同时受限于屏幕宽高，避免纵向溢出 */
+      width: min(80vw, 42dvh, 320px);
+      height: min(80vw, 42dvh, 320px);
+      margin: 10px 0;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     canvas {
       width: 100%;
@@ -57,30 +64,32 @@
     }
     #score-board {
       text-align: center;
-      min-height: 80px;
+      flex-shrink: 0;
+      min-height: 60px;
     }
     .score-num {
-      font-size: 2.8rem;
+      font-size: clamp(2rem, 8vw, 2.6rem);
       font-weight: bold;
+      line-height: 1.1;
       color: #fdcb6e;
       text-shadow: 0 0 15px rgba(253, 203, 110, 0.6);
     }
     .score-feedback {
-      font-size: 0.9rem;
+      font-size: clamp(0.75rem, 3.2vw, 0.85rem);
       color: #dfe6e9;
-      margin-top: 2px;
+      margin-top: 4px;
     }
     .btn-group {
       display: flex;
       gap: 12px;
       width: 100%;
-      max-width: 360px;
-      margin-bottom: 20px;
+      max-width: 320px;
+      flex-shrink: 0;
     }
     button {
       flex: 1;
-      padding: 12px;
-      font-size: 1rem;
+      padding: 10px 0;
+      font-size: clamp(0.9rem, 3.8vw, 1rem);
       border: none;
       border-radius: 25px;
       cursor: pointer;
@@ -131,7 +140,7 @@
     let points = [];
     let currentScore = null;
 
-    // 高清屏适配与初始化画布尺寸
+    // 高清屏动态适配与画布重置
     function initCanvas() {
       const rect = canvas.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
@@ -142,7 +151,7 @@
     window.addEventListener('resize', initCanvas);
     initCanvas();
 
-    // 获取触控或鼠标在 Canvas 内部的坐标
+    // 获取触控或鼠标在 Canvas 内部的精确坐标
     function getCanvasPoint(e) {
       const rect = canvas.getBoundingClientRect();
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -236,23 +245,19 @@
       const startPt = points[0];
       const endPt = points[points.length - 1];
       const gapDist = Math.hypot(startPt.x - endPt.x, startPt.y - endPt.y);
-      const gapRatio = Math.min(gapDist / avgR, 1.0); // 缺口占半径的比例
+      const gapRatio = Math.min(gapDist / avgR, 1.0);
 
-      // 5. 综合算分
-      // 形状越接近正圆，relDeviation 越小；首尾越闭合，gapRatio 越小
+      // 5. 综合评分
       let score = 100 - (relDeviation * 140) - (gapRatio * 30);
-      score = Math.max(0, Math.min(100, score)); // 限制在 0 - 100 分
+      score = Math.max(0, Math.min(100, score));
 
       currentScore = Math.round(score * 10) / 10;
 
-      // 反馈评价
       let feedback = "这轮月亮真圆！中秋快乐！";
       if (currentScore < 60) feedback = "月有阴晴圆缺，再接再厉！";
       else if (currentScore < 85) feedback = "很不错的月亮，快赶上十五的月亮了！";
 
       showResult(currentScore, feedback);
-
-      // 可视化辅助：绘制理想圆对比
       drawIdealCircle(centerX, centerY, avgR);
     }
 
@@ -261,7 +266,6 @@
       feedbackText.textContent = text;
     }
 
-    // 绘制半透明理想圆辅助线
     function drawIdealCircle(cx, cy, r) {
       ctx.beginPath();
       ctx.arc(cx, cy, r, 0, Math.PI * 2);
@@ -272,7 +276,6 @@
       ctx.setLineDash([]);
     }
 
-    // 重置画布
     function resetCanvas() {
       const rect = canvas.getBoundingClientRect();
       ctx.clearRect(0, 0, rect.width, rect.height);
@@ -282,7 +285,6 @@
       feedbackText.textContent = "请在虚线圈内画一个封闭的圆";
     }
 
-    // 成绩提交入口（配合后端 API 使用）
     function submitScore() {
       if (currentScore === null || currentScore === 0) {
         alert("请先画一个完整的月亮再提交哦！");
@@ -293,7 +295,6 @@
 
       console.log("准备提交的数据：", { nickname, score: currentScore, time: new Date() });
       alert(`🎉 恭喜 ${nickname}！得分 ${currentScore} 分已记录。`);
-      // 后续在此处调用 Supabase/Firebase 写入数据
     }
   </script>
 </body>
