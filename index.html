@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>中秋画月挑战</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    body {
+      background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
+      color: #f6e58d;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      touch-action: none;
+    }
+    header {
+      text-align: center;
+      margin-top: 10px;
+    }
+    header h1 {
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      color: #ffeaa7;
+      text-shadow: 0 0 10px rgba(255, 234, 167, 0.5);
+    }
+    header p {
+      font-size: 0.85rem;
+      color: #b2bec3;
+      margin-top: 4px;
+    }
+    #canvas-container {
+      position: relative;
+      width: 90vw;
+      height: 90vw;
+      max-width: 360px;
+      max-height: 360px;
+      margin: auto;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed rgba(255, 234, 167, 0.3);
+      border-radius: 50%;
+      display: block;
+    }
+    #score-board {
+      text-align: center;
+      min-height: 80px;
+    }
+    .score-num {
+      font-size: 2.8rem;
+      font-weight: bold;
+      color: #fdcb6e;
+      text-shadow: 0 0 15px rgba(253, 203, 110, 0.6);
+    }
+    .score-feedback {
+      font-size: 0.9rem;
+      color: #dfe6e9;
+      margin-top: 2px;
+    }
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+      max-width: 360px;
+      margin-bottom: 20px;
+    }
+    button {
+      flex: 1;
+      padding: 12px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: opacity 0.2s;
+    }
+    button:active {
+      opacity: 0.7;
+    }
+    .btn-reset {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+    .btn-submit {
+      background: linear-gradient(135deg, #f39c12, #f1c40f);
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🥮 中秋画月挑战</h1>
+    <p>单指一笔画出心中的满月</p>
+  </header>
+
+  <div id="canvas-container">
+    <canvas id="drawCanvas"></canvas>
+  </div>
+
+  <div id="score-board">
+    <div id="scoreDisplay" class="score-num">--</div>
+    <div id="feedbackText" class="score-feedback">请在虚线圈内画一个封闭的圆</div>
+  </div>
+
+  <div class="btn-group">
+    <button class="btn-reset" onclick="resetCanvas()">重新画</button>
+    <button class="btn-submit" id="submitBtn" onclick="submitScore()">提交成绩</button>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('drawCanvas');
+    const ctx = canvas.getContext('2d');
+    const scoreDisplay = document.getElementById('scoreDisplay');
+    const feedbackText = document.getElementById('feedbackText');
+
+    let isDrawing = false;
+    let points = [];
+    let currentScore = null;
+
+    // 高清屏适配与初始化画布尺寸
+    function initCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+    }
+    window.addEventListener('resize', initCanvas);
+    initCanvas();
+
+    // 获取触控或鼠标在 Canvas 内部的坐标
+    function getCanvasPoint(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+      };
+    }
+
+    // 开始绘制
+    function startDraw(e) {
+      e.preventDefault();
+      resetCanvas();
+      isDrawing = true;
+      const pt = getCanvasPoint(e);
+      points.push(pt);
+      
+      ctx.beginPath();
+      ctx.strokeStyle = '#ffeaa7';
+      ctx.lineWidth = 4;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.moveTo(pt.x, pt.y);
+    }
+
+    // 绘制中
+    function moveDraw(e) {
+      if (!isDrawing) return;
+      e.preventDefault();
+      const pt = getCanvasPoint(e);
+      points.push(pt);
+
+      ctx.lineTo(pt.x, pt.y);
+      ctx.stroke();
+    }
+
+    // 绘制结束并计算得分
+    function endDraw(e) {
+      if (!isDrawing) return;
+      isDrawing = false;
+      calculateCircleScore();
+    }
+
+    // 绑定触控与鼠标事件
+    canvas.addEventListener('touchstart', startDraw, { passive: false });
+    canvas.addEventListener('touchmove', moveDraw, { passive: false });
+    canvas.addEventListener('touchend', endDraw, { passive: false });
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', moveDraw);
+    canvas.addEventListener('mouseup', endDraw);
+
+    // 核心圆度打分算法
+    function calculateCircleScore() {
+      if (points.length < 25) {
+        showResult(0, "轨迹太短啦，请画一个完整的圆");
+        return;
+      }
+
+      // 1. 计算几何中心 (形心)
+      let sumX = 0, sumY = 0;
+      for (const p of points) {
+        sumX += p.x;
+        sumY += p.y;
+      }
+      const centerX = sumX / points.length;
+      const centerY = sumY / points.length;
+
+      // 2. 计算各点到中心的距离与平均半径
+      let sumR = 0;
+      const radii = points.map(p => {
+        const dist = Math.hypot(p.x - centerX, p.y - centerY);
+        sumR += dist;
+        return dist;
+      });
+      const avgR = sumR / points.length;
+
+      if (avgR < 20) {
+        showResult(0, "画得太小啦，请画大一些");
+        return;
+      }
+
+      // 3. 计算半径的相对平均偏差 (Mean Absolute Deviation)
+      let deviationSum = 0;
+      for (const r of radii) {
+        deviationSum += Math.abs(r - avgR);
+      }
+      const relDeviation = (deviationSum / points.length) / avgR;
+
+      // 4. 首尾闭合度惩罚
+      const startPt = points[0];
+      const endPt = points[points.length - 1];
+      const gapDist = Math.hypot(startPt.x - endPt.x, startPt.y - endPt.y);
+      const gapRatio = Math.min(gapDist / avgR, 1.0); // 缺口占半径的比例
+
+      // 5. 综合算分
+      // 形状越接近正圆，relDeviation 越小；首尾越闭合，gapRatio 越小
+      let score = 100 - (relDeviation * 140) - (gapRatio * 30);
+      score = Math.max(0, Math.min(100, score)); // 限制在 0 - 100 分
+
+      currentScore = Math.round(score * 10) / 10;
+
+      // 反馈评价
+      let feedback = "这轮月亮真圆！中秋快乐！";
+      if (currentScore < 60) feedback = "月有阴晴圆缺，再接再厉！";
+      else if (currentScore < 85) feedback = "很不错的月亮，快赶上十五的月亮了！";
+
+      showResult(currentScore, feedback);
+
+      // 可视化辅助：绘制理想圆对比
+      drawIdealCircle(centerX, centerY, avgR);
+    }
+
+    function showResult(score, text) {
+      scoreDisplay.textContent = score > 0 ? score + "分" : "--";
+      feedbackText.textContent = text;
+    }
+
+    // 绘制半透明理想圆辅助线
+    function drawIdealCircle(cx, cy, r) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(253, 203, 110, 0.4)';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([6, 6]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    // 重置画布
+    function resetCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      ctx.clearRect(0, 0, rect.width, rect.height);
+      points = [];
+      currentScore = null;
+      scoreDisplay.textContent = "--";
+      feedbackText.textContent = "请在虚线圈内画一个封闭的圆";
+    }
+
+    // 成绩提交入口（配合后端 API 使用）
+    function submitScore() {
+      if (currentScore === null || currentScore === 0) {
+        alert("请先画一个完整的月亮再提交哦！");
+        return;
+      }
+      const nickname = prompt("请输入您的姓名/昵称：");
+      if (!nickname) return;
+
+      console.log("准备提交的数据：", { nickname, score: currentScore, time: new Date() });
+      alert(`🎉 恭喜 ${nickname}！得分 ${currentScore} 分已记录。`);
+      // 后续在此处调用 Supabase/Firebase 写入数据
+    }
+  </script>
+</body>
+</html>
