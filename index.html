@@ -1,53 +1,557 @@
 <!doctype html>
-<html lang="zh-CN"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>中秋画月挑战</title>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111b36">
+<title>一笔画月挑战</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=ZCOOL+XiaoWei&display=swap');
-:root{--gold:#f6cf79;--pale:#ffebba;--ink:#071327}*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}body{min-height:100vh;min-height:100dvh;overflow:hidden;color:#fff8e8;background:#071327;font-family:"Noto Serif SC","Songti SC",serif}button{font:600 15px "Noto Serif SC","Songti SC",serif}#sky{position:fixed;inset:0;width:100%;height:100%}.moon-haze{position:fixed;z-index:0;top:-18vw;left:50%;width:min(92vw,630px);aspect-ratio:1;border-radius:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(255,239,185,.22),rgba(255,232,165,.07) 28%,rgba(198,218,255,.025) 47%,transparent 69%);filter:blur(4px);pointer-events:none}.cloud{position:fixed;z-index:1;width:250px;height:42px;opacity:0;pointer-events:none;filter:blur(1px);background:radial-gradient(ellipse at 25% 68%,rgba(188,207,230,.16) 0 21%,transparent 22%),radial-gradient(ellipse at 48% 43%,rgba(188,207,230,.15) 0 28%,transparent 29%),radial-gradient(ellipse at 73% 72%,rgba(188,207,230,.12) 0 27%,transparent 28%);animation:cloud-drift 18s linear infinite}.cloud.one{top:25%;left:-280px;animation-delay:-3s}.cloud.two{top:53%;left:-310px;transform:scale(.76);animation-duration:23s;animation-delay:-15s}@keyframes cloud-drift{0%{opacity:0;translate:0 0}12%,79%{opacity:1}100%{opacity:0;translate:calc(100vw + 590px) 14px}}.world{position:fixed;z-index:1;inset:auto 0 0;height:28vh;pointer-events:none;overflow:hidden}.water{position:absolute;inset:63% 0 0;background:linear-gradient(#0a2342,#050f22);opacity:.7}.water::after{content:"";position:absolute;inset:18px -10% 0;background:repeating-linear-gradient(178deg,transparent 0 13px,rgba(171,202,223,.08) 14px 15px,transparent 16px 27px);transform:perspective(170px) rotateX(59deg);transform-origin:top}.mountain{position:absolute;bottom:28%;width:0;height:0;border-left:22vw solid transparent;border-right:22vw solid transparent;border-bottom:18vh solid #071a33;opacity:.93}.mountain.a{left:-13vw;border-bottom-color:#0b2846}.mountain.b{left:13vw;border-left-width:30vw;border-right-width:30vw;border-bottom-width:23vh;border-bottom-color:#081d38}.mountain.c{right:-12vw;border-bottom-color:#06172e}.osmanthus{position:absolute;bottom:24%;right:4%;width:100px;height:215px;border-radius:55% 0 0 0;border-left:6px solid rgba(47,29,18,.85);transform:rotate(7deg)}.osmanthus::before,.osmanthus::after{content:"✦  ✦   ✦\A   ✦  ✦\A ✦    ✦";white-space:pre;position:absolute;color:#e6b851;font-size:21px;line-height:1.5;text-shadow:0 0 9px rgba(255,207,85,.65)}.osmanthus::before{right:-20px;top:-12px}.osmanthus::after{right:22px;top:45px;font-size:16px;opacity:.75}.lantern{position:absolute;z-index:2;bottom:25%;left:13%;width:18px;height:25px;border-radius:50% 50% 45% 45%;background:linear-gradient(90deg,#ba642b,#ffd06a 48%,#bd6125);box-shadow:0 0 19px 6px rgba(255,169,61,.31);animation:lantern 7s ease-in-out infinite}.lantern::after{content:"";position:absolute;width:1px;height:36px;left:9px;top:23px;background:#bb7c38}.lantern::before{content:"";position:absolute;left:3px;top:-5px;width:12px;border-top:2px solid #d4a453}@keyframes lantern{50%{translate:9px -50px;rotate:4deg}}
-main{z-index:3;position:relative;min-height:100dvh;height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:max(18px,env(safe-area-inset-top)) 19px max(17px,env(safe-area-inset-bottom))}header{text-align:center;animation:arrive .8s ease both}.eyebrow{color:#e8d7ab;font-size:11px;letter-spacing:.33em;text-indent:.33em;opacity:.76}h1{margin-top:4px;font-family:"ZCOOL XiaoWei","Noto Serif SC",serif;font-size:clamp(29px,8vw,42px);font-weight:400;letter-spacing:.16em;text-indent:.16em;color:var(--pale);text-shadow:0 0 22px rgba(252,218,143,.48)}header p{margin-top:2px;color:#d2d9e6;font-size:13px;letter-spacing:.12em}.mirror-wrap{position:relative;width:min(82vw,49dvh,365px);aspect-ratio:1;display:grid;place-items:center;animation:arrive .9s .08s ease both}.fan-handle{position:absolute;z-index:-1;width:33px;height:92px;bottom:-70px;left:calc(50% - 16px);border-radius:0 0 50% 50%;background:linear-gradient(90deg,#8d5e25,#e7be64 45%,#865823);box-shadow:0 8px 17px rgba(0,0,0,.3)}.fan-handle::after{content:"";position:absolute;width:45px;height:7px;top:-1px;left:-6px;border-radius:100%;background:#e2bc68}.mirror{position:relative;width:100%;height:100%;padding:9px;overflow:hidden;border:1px solid rgba(255,226,158,.68);border-radius:50%;background:linear-gradient(140deg,rgba(224,241,255,.2),rgba(44,85,127,.14) 53%,rgba(255,207,110,.1));box-shadow:inset 0 0 0 7px rgba(255,241,197,.06),inset 0 0 35px rgba(255,233,169,.12),0 0 0 8px rgba(255,219,134,.028),0 0 50px rgba(255,219,134,.16);backdrop-filter:blur(6px)}.mirror::before{content:"";position:absolute;inset:18px;border-radius:50%;border:1px solid rgba(255,231,172,.2);pointer-events:none}.mirror::after{content:"月宫镜";position:absolute;top:18px;left:50%;transform:translateX(-50%);color:rgba(255,234,175,.42);letter-spacing:.32em;text-indent:.32em;font-size:10px;pointer-events:none}#drawCanvas{display:block;width:100%;height:100%;border-radius:50%;touch-action:none;cursor:crosshair}.brush-tip{position:absolute;z-index:4;width:13px;height:13px;display:none;border:2px solid rgba(255,235,172,.76);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 12px #ffd56b;pointer-events:none}.stage-note{position:absolute;bottom:-36px;width:100%;text-align:center;color:#d0d9e9;font-size:12px;letter-spacing:.06em;transition:opacity .25s}.rabbit{position:absolute;z-index:3;right:16%;bottom:19%;display:none;color:#fff3cf;font-size:41px;filter:drop-shadow(0 0 8px #ffe298);animation:rabbit .8s cubic-bezier(.2,.9,.3,1.2) both}.rabbit.show{display:block}@keyframes rabbit{from{transform:translateY(35px) scale(.4);opacity:0}to{transform:none;opacity:1}}.goddess{position:absolute;z-index:3;top:18%;left:-16%;display:none;color:rgba(255,235,192,.85);font-size:48px;filter:drop-shadow(0 0 13px #ffe3a2);animation:goddess 4.4s ease-in-out both}.goddess.show{display:block}@keyframes goddess{from{transform:translateX(-35px);opacity:0}25%,74%{opacity:1}to{transform:translateX(240px) translateY(-15px);opacity:0}}
-.score-panel{min-height:112px;width:min(100%,460px);display:grid;place-items:center;align-content:center;text-align:center;padding:8px 12px;background:linear-gradient(90deg,transparent,rgba(11,31,61,.36),transparent);animation:arrive 1s .15s ease both}.score{color:var(--gold);font-size:clamp(39px,11vw,55px);font-weight:700;line-height:1;text-shadow:0 0 18px rgba(255,202,75,.62);font-variant-numeric:tabular-nums}.score small{font-size:.44em;margin-left:4px;font-weight:500}.name{min-height:24px;margin-top:5px;color:#fff0c1;font-size:17px;font-weight:600;letter-spacing:.12em}.message{min-height:20px;max-width:330px;color:#d8e0ee;font-size:12px;line-height:1.55}.roundness{min-height:19px;margin-top:5px;color:#efd493;font-size:11px;letter-spacing:.05em}.actions{width:min(100%,380px);display:flex;gap:10px;animation:arrive 1.08s .2s ease both}.btn{height:48px;border-radius:999px;border:1px solid rgba(255,236,180,.2);color:#fff7e8;background:rgba(17,42,76,.56);transition:transform .15s,filter .15s,opacity .15s}.btn:active{transform:scale(.96)}.btn:hover{filter:brightness(1.1)}.btn.primary{flex:1.35;border:0;color:#4b2d04;background:linear-gradient(135deg,#ffe8ad,#efb440);box-shadow:0 8px 26px rgba(238,176,54,.24)}.btn.secondary{flex:1}.btn:disabled{opacity:.45;cursor:not-allowed}#blossoms{position:fixed;z-index:8;inset:0;pointer-events:none;overflow:hidden}.petal{position:absolute;color:#f5be53;font-size:16px;text-shadow:0 0 7px #f6ce74;animation:petal-fall var(--d) linear both}@keyframes petal-fall{from{translate:0 -30px;rotate:0deg;opacity:0}12%{opacity:1}to{translate:var(--x) 110vh;rotate:520deg;opacity:0}}.modal{position:fixed;z-index:20;inset:0;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(1,9,23,.75);backdrop-filter:blur(10px)}.modal.show{display:flex}.modal-box{width:min(100%,367px);animation:pop .35s ease both}#shareCard{display:block;width:100%;border-radius:20px;box-shadow:0 20px 70px rgba(0,0,0,.52)}.modal-actions{display:flex;gap:10px;margin-top:12px}.modal-actions .btn{flex:1}@keyframes arrive{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}@keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}@media(max-height:670px){main{padding-top:9px;padding-bottom:11px}.mirror-wrap{width:min(67vw,43dvh,290px)}.score-panel{min-height:86px}.fan-handle{height:69px;bottom:-53px}.stage-note{bottom:-29px}.eyebrow{display:none}h1{font-size:28px}.score{font-size:39px}}
-/* 星空绘月模式：移除月宫镜与团扇的所有实体边界 */
-.mirror-wrap{width:min(82vw,49dvh,365px)}
-.fan-handle{display:none}.mirror{padding:0;overflow:visible;border:0;background:transparent;box-shadow:none;backdrop-filter:none}.mirror::before,.mirror::after{display:none}
-#drawCanvas{border-radius:0}.mirror-wrap::before{content:"";position:absolute;width:80%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,226,153,.06),transparent 66%);filter:blur(2px);pointer-events:none}
-.osmanthus{position:fixed;z-index:6;bottom:72px;right:-5px;width:92px;height:184px}.moon-emoji{position:absolute;z-index:5;display:none;align-items:center;justify-content:center;line-height:1;transform:translate(-50%,-50%);filter:drop-shadow(0 0 18px rgba(255,218,129,.9));pointer-events:none}.moon-emoji.show{display:flex;animation:moon-pop .58s cubic-bezier(.2,.9,.25,1.2) both}@keyframes moon-pop{from{opacity:0;transform:translate(-50%,-50%) scale(.45)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
-@media(max-height:670px){.mirror-wrap{width:min(67vw,43dvh,290px)}}
-</style></head><body>
-<canvas id="sky"></canvas><div class="moon-haze"></div><div class="cloud one"></div><div class="cloud two"></div><div class="world"><div class="mountain a"></div><div class="mountain b"></div><div class="mountain c"></div><div class="water"></div><div class="lantern"></div><div class="osmanthus"></div></div><div id="blossoms"></div>
-<main><header><div class="eyebrow">MID-AUTUMN NIGHT WALK</div><h1>中秋画月挑战</h1><p>一笔一月 · 团圆常在</p></header><section class="mirror-wrap"><div class="fan-handle"></div><div class="mirror"><canvas id="drawCanvas" aria-label="在这里一笔画月"></canvas><span class="brush-tip" id="tip"></span><span class="rabbit" id="rabbit">🐇</span><span class="goddess" id="goddess">♧</span></div><div class="stage-note" id="note">在月宫镜中，一笔画出满月</div></section><section class="score-panel" aria-live="polite"><div class="score" id="score">--</div><div class="name" id="name">今夜，请为思念的人画一轮月</div><div class="message" id="message">圆润度将由最佳拟合圆计算</div><div class="roundness" id="roundness"></div></section><div class="actions"><button class="btn secondary" id="reset">再邀明月</button><button class="btn primary" id="light" disabled>点亮我的月亮</button></div></main>
-<div class="modal" id="modal"><div class="modal-box"><canvas id="shareCard" width="1080" height="1350"></canvas><div class="modal-actions"><button class="btn secondary" id="close">返回</button><button class="btn primary" id="save">保存月亮卡</button></div></div></div>
+:root{color-scheme:dark;--ink:#111b36;--gold:#efcf96;--white:#faf4e8;--muted:#b9c6dc}
+*{box-sizing:border-box} [hidden]{display:none!important}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;overscroll-behavior:none}
+body{font-family:"Noto Serif CJK SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;color:var(--white);background:radial-gradient(ellipse at 80% 18%,#34426380,transparent 42%),linear-gradient(160deg,#0c152c,#1c2d49 70%,#30394c);-webkit-tap-highlight-color:transparent}
+button,input,select{font:inherit} button{min-height:48px;border-radius:15px;border:1px solid #c7b58f55;padding:10px 18px;cursor:pointer;color:var(--white);background:#ffffff09} button:disabled{opacity:.42;cursor:not-allowed} button:focus-visible,input:focus-visible{outline:3px solid #f6d393;outline-offset:4px}
+button.primary{background:linear-gradient(120deg,#f0d6a5,#dcb378);border:0;color:#263047;font-weight:700}
+.app{height:100vh;height:100svh;max-width:900px;margin:auto;display:flex;flex-direction:column;padding: max(14px,env(safe-area-inset-top)) 18px max(12px,env(safe-area-inset-bottom));position:relative;isolation:isolate}
+.sky{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden;background-image:radial-gradient(circle at 14% 24%,#ffe4ac88 0 1px,transparent 1.7px),radial-gradient(circle at 78% 43%,#ffffff66 0 1px,transparent 1.7px),radial-gradient(circle at 34% 68%,#ffe4ac55 0 1px,transparent 1.7px);background-size:193px 251px,277px 219px,331px 307px}
+.sky:after{content:"";position:absolute;inset:auto -30% -90px;height:170px;border-radius:50% 50% 0 0;background:#0b192b66;transform:rotate(-7deg)}
+header{text-align:center;flex:none;position:relative;padding:0 0 10px}.language-switch{position:absolute;left:-4px;top:-7px;z-index:2}.language-switch select{min-height:32px;max-width:112px;border:1px solid #d6c49b42;border-radius:999px;background:#111d34cc;color:#e8dcc5;padding:4px 24px 4px 10px;font-size:11px;cursor:pointer}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.eyebrow{font-size:10px;letter-spacing:4px;color:var(--gold);margin:0 0 9px}h1{font-family:"Songti SC","STSong","SimSun",serif;font-size:clamp(25px,6vw,34px);font-weight:500;letter-spacing:5px;margin:0 0 9px}.subtitle{font-size:12px;color:#c7d0df;margin:0;letter-spacing:1px}
+.branch{position:absolute;right:-9px;top:-9px;width:75px;height:80px;opacity:.65;pointer-events:none}
+.stage{position:relative;flex:1;min-height:0;margin:0 -18px;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}
+canvas{width:100%;height:100%;display:block;touch-action:none;cursor:crosshair}
+.hint{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;pointer-events:none;color:#c4cddd;font-size:13px;letter-spacing:2px;text-align:center}.hint-moon{width:66px;height:66px;border:1px solid #eed5a13d;border-radius:50%;box-shadow:0 0 45px #e4d2ac0c,inset 0 0 30px #e4d2ac0a}.hint small{font-size:10px;color:#a8b6cc;letter-spacing:3px}
+.stage-note{position:absolute;bottom:9px;left:0;right:0;text-align:center;pointer-events:none;color:var(--muted);font-size:11px;letter-spacing:1px}
+footer{flex:none;position:relative;border-top:1px solid #d8c6a126;padding-top:10px}.result-top{display:flex;align-items:center;justify-content:space-between;gap:10px}.label{font-size:11px;letter-spacing:2px;color:var(--gold)}.score{font-size:42px;line-height:1.15;font-weight:300;font-variant-numeric:tabular-nums}.score small{font-size:12px;color:var(--muted);margin-left:5px}.time{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}.copy{min-height:49px;padding:6px 0 8px}.verdict{font-size:13px;margin:0 0 5px;line-height:1.5}.poem{font-size:11px;line-height:1.5;color:#d4c4a6;margin:0}.actions{display:grid;grid-template-columns:1fr 1.35fr;gap:12px}.seal{text-align:center;font-size:9px;letter-spacing:3px;color:#aab8cf;margin-top:9px}
+.ripple{position:absolute;left:var(--x,50%);top:var(--y,50%);width:var(--diameter,160px);height:var(--diameter,160px);border:1px solid #e7cd9880;border-radius:50%;pointer-events:none;opacity:0;transform:translate(-50%,-50%)}.ripple.play{animation:moonlight 850ms ease-out}@keyframes moonlight{0%{opacity:.6;transform:translate(-50%,-50%) scale(.8)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.4)}}
+.modal{position:fixed;inset:0;z-index:20;background:#060d21c9;display:flex;align-items:center;justify-content:center;padding:24px;overflow:auto}.dialog{width:min(100%,380px);padding:25px;background:#1c2b46;border:1px solid #efd4a54d;border-radius:22px;box-shadow:0 24px 90px #0006}.dialog h2{font-size:22px;font-weight:500;margin:0 0 10px}.dialog p,.dialog label{font-size:13px;line-height:1.7}.dialog p{color:var(--muted)}.dialog input{display:block;width:100%;min-height:48px;border:1px solid #a1aec566;border-radius:10px;background:#101d34;color:var(--white);padding:10px;margin:10px 0 5px;font-size:16px}.dialog .error{color:#ffceaa;min-height:24px;margin:8px 0}.dialog .actions{grid-template-columns:1fr 1fr}
+html[lang="zh-TW"] body{font-family:"Noto Serif CJK TC","Source Han Serif TC","Songti TC","STSong",serif}html[lang="en"] body{font-family:"Iowan Old Style","Baskerville","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif}html[lang="en"] h1{letter-spacing:2px;font-size:clamp(23px,5.5vw,32px)}html[lang="en"] .subtitle{letter-spacing:.3px}html[lang="en"] .seal{letter-spacing:.5px}html[lang="en"] .dialog .actions button{font-size:12px}
+@media(max-height:650px){.app{padding-top:max(8px,env(safe-area-inset-top))}.eyebrow,.seal{display:none}h1{font-size:25px;margin-bottom:5px}header{padding-bottom:5px}.score{font-size:32px}.copy{min-height:42px;padding:4px 0}.hint{gap:12px}.hint-moon{width:46px;height:46px}}
+@media(orientation:landscape) and (max-height:540px){.app{display:grid;grid-template-columns:minmax(0,1fr) 270px;grid-template-rows:auto minmax(0,1fr);gap:8px 20px}header{grid-column:1 / 3}.stage{grid-column:1;grid-row:2;margin:0}footer{grid-column:2;grid-row:2;align-self:center}.subtitle{display:none}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="app" id="app">
+ <div class="sky" aria-hidden="true"></div>
+ <header>
+  <div class="language-switch"><label class="sr-only" id="languageLabel" for="languageSelect">语言</label><select id="languageSelect" aria-labelledby="languageLabel"><option value="zh-CN">简体中文</option><option value="zh-TW">繁体中文</option><option value="en">English</option></select></div>
+  <p class="eyebrow">MID-AUTUMN · 2026</p>
+  <h1 id="mainTitle">一笔画月挑战</h1>
+  <p class="subtitle" id="subtitle">在星空中，一笔画出属于你的中秋明月</p>
+  <svg class="branch" viewBox="0 0 90 95" aria-hidden="true"><g fill="none" stroke="#c6ac76" stroke-width="1"><path d="M86 3Q53 27 35 87M65 24L37 23M56 39L79 40M46 59L21 51"/></g><g fill="#b9b780" opacity=".65"><ellipse cx="43" cy="24" rx="14" ry="4" transform="rotate(15 43 24)"/><ellipse cx="69" cy="40" rx="13" ry="4" transform="rotate(-23 69 40)"/><ellipse cx="26" cy="52" rx="13" ry="4" transform="rotate(28 26 52)"/></g><g fill="#efc889"><circle cx="56" cy="33" r="2.5"/><circle cx="61" cy="31" r="2"/><circle cx="60" cy="36" r="2.3"/><circle cx="38" cy="68" r="2.5"/><circle cx="43" cy="66" r="2"/><circle cx="42" cy="71" r="2.3"/></g></svg>
+ </header>
+ <section class="stage" id="stage" aria-label="画月区域">
+  <canvas id="canvas" aria-label="用一根手指或鼠标，连续画出一轮圆月">你的浏览器不支持 Canvas，请使用较新的浏览器。</canvas>
+  <div class="hint" id="hint"><span class="hint-moon"></span><span id="hintMain">请用一根手指，一笔画出圆月</span><small id="hintSub">不必匆忙 · 圆满自有时</small></div>
+  <div class="ripple" id="ripple" aria-hidden="true"></div>
+  <div class="stage-note" id="stageNote">一笔成月 · 松手揭晓</div>
+ </section>
+ <footer>
+  <div class="result-top"><div><span class="label" id="scoreLabel">圆度得分</span><div class="score"><span id="score">—</span><small>/ 100</small></div></div><span class="time" id="timer">本次用时 0.0 秒</span></div>
+  <div class="copy" role="status" aria-live="polite" aria-atomic="true"><p class="verdict" id="verdict">月尚未满，静候你的一笔。</p><p class="poem" id="poem">用时不影响得分，顺时针、逆时针皆可。</p></div>
+  <div class="actions"><button id="reset" type="button">重新画月</button><button id="submit" class="primary" type="button" disabled>提交成绩</button></div>
+  <div class="seal" id="seal">月圆人团圆 · 一笔寄相思</div>
+ </footer>
+</main>
+<div class="modal" id="modal" hidden>
+ <form class="dialog" id="nicknameForm" role="dialog" aria-modal="true" aria-labelledby="dialogTitle" aria-describedby="nicknameHelp">
+  <h2 id="dialogTitle">为这轮月，留个名字</h2>
+  <p id="nicknameHelp">最多 12 个中文字符或 24 个普通字符；混合输入按长度折算。当前为提交演示。</p>
+  <label for="nickname" id="nicknameLabel">你的昵称</label><input id="nickname" autocomplete="nickname" maxlength="48" placeholder="例如：追月的人" required>
+  <p id="nicknameError" class="error" role="status" aria-live="polite"></p>
+  <div class="actions"><button id="closeModal" type="button">返回</button><button id="confirmSubmit" class="primary" type="submit">准备提交</button></div>
+ </form>
+</div>
 <script>
-const cvs=document.querySelector('#drawCanvas'),ctx=cvs.getContext('2d'),sky=document.querySelector('#sky'),sctx=sky.getContext('2d'),tip=document.querySelector('#tip'),note=document.querySelector('#note'),scoreEl=document.querySelector('#score'),nameEl=document.querySelector('#name'),messageEl=document.querySelector('#message'),roundnessEl=document.querySelector('#roundness'),light=document.querySelector('#light'),rabbit=document.querySelector('#rabbit'),goddess=document.querySelector('#goddess');let dpr=1,drawing=false,points=[],outcome=null,reveal=0,frame=null;
-function resize(){const r=cvs.getBoundingClientRect();dpr=Math.min(3,devicePixelRatio||1);cvs.width=Math.round(r.width*dpr);cvs.height=Math.round(r.height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);paint(reveal)}function getPoint(e){const r=cvs.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}function brushPath(alpha=1){if(points.length<2)return;ctx.save();ctx.globalAlpha=alpha;ctx.strokeStyle='#ffe6a0';ctx.shadowColor='#ffca5b';ctx.shadowBlur=11;ctx.lineCap='round';ctx.lineJoin='round';ctx.lineWidth=5.2;ctx.beginPath();ctx.moveTo(points[0].x,points[0].y);for(let i=1;i<points.length;i++){const p=points[i],q=points[i-1];ctx.quadraticCurveTo(q.x,q.y,(q.x+p.x)/2,(q.y+p.y)/2)}ctx.stroke();ctx.restore()}
-function paint(t=0){const r=cvs.getBoundingClientRect();ctx.clearRect(0,0,r.width,r.height);if(!outcome){brushPath();return}const{fit}=outcome,eased=1-Math.pow(1-t,3);ctx.save();ctx.beginPath();ctx.arc(fit.cx,fit.cy,fit.r,0,Math.PI*2);ctx.clip();const grad=ctx.createRadialGradient(fit.cx-fit.r*.3,fit.cy-fit.r*.35,fit.r*.08,fit.cx,fit.cy,fit.r*1.05);grad.addColorStop(0,`rgba(255,251,221,${.92*eased})`);grad.addColorStop(.66,`rgba(255,224,146,${.77*eased})`);grad.addColorStop(1,`rgba(219,172,80,${.78*eased})`);ctx.fillStyle=grad;ctx.fillRect(fit.cx-fit.r,fit.cy-fit.r,fit.r*2,fit.r*2);ctx.fillStyle=`rgba(139,97,48,${.14*eased})`;for(let i=0;i<9;i++){const a=i*2.37;ctx.beginPath();ctx.arc(fit.cx+Math.cos(a)*fit.r*(.22+(i%3)*.15),fit.cy+Math.sin(a)*fit.r*(.16+(i%4)*.11),fit.r*(.045+(i%3)*.032),0,Math.PI*2);ctx.fill()}ctx.restore();brushPath(1-eased*.76);ctx.save();ctx.globalAlpha=eased;ctx.shadowColor='#ffcf65';ctx.shadowBlur=18;ctx.strokeStyle='#fff0b7';ctx.lineWidth=1.4;ctx.beginPath();ctx.arc(fit.cx,fit.cy,fit.r,0,Math.PI*2);ctx.stroke();ctx.restore()}
-function start(e){e.preventDefault();clear(false);drawing=true;cvs.setPointerCapture?.(e.pointerId);points=[getPoint(e)];note.style.opacity=0;tip.style.display='block';moveTip(points[0]);paint()}function moveTip(p){tip.style.left=p.x+'px';tip.style.top=p.y+'px'}function move(e){if(!drawing)return;const p=getPoint(e),last=points.at(-1);if(Math.hypot(p.x-last.x,p.y-last.y)<1.1)return;points.push(p);moveTip(p);paint()}function end(e){if(!drawing)return;drawing=false;tip.style.display='none';cvs.releasePointerCapture?.(e.pointerId);grade()}cvs.addEventListener('pointerdown',start);cvs.addEventListener('pointermove',move);cvs.addEventListener('pointerup',end);cvs.addEventListener('pointercancel',end);
-function resample(ps,step=3){const result=[ps[0]];let last=ps[0],carry=0;for(let i=1;i<ps.length;i++){const target=ps[i];let dx=target.x-last.x,dy=target.y-last.y,len=Math.hypot(dx,dy);if(!len)continue;while(carry+len>=step){const need=step-carry,t=need/len;last={x:last.x+dx*t,y:last.y+dy*t};result.push(last);dx=target.x-last.x;dy=target.y-last.y;len=Math.hypot(dx,dy);carry=0}carry+=len;last=target}return result}function circleFit(ps){let sx=0,sy=0,sxx=0,syy=0,sxy=0,sxz=0,syz=0;for(const p of ps){const z=p.x*p.x+p.y*p.y;sx+=p.x;sy+=p.y;sxx+=p.x*p.x;syy+=p.y*p.y;sxy+=p.x*p.y;sxz+=p.x*z;syz+=p.y*z}const A=[[sxx,sxy,sx],[sxy,syy,sy],[sx,sy,ps.length]],b=[-sxz,-syz,-(sxx+syy)];for(let i=0;i<3;i++){let m=i;for(let j=i+1;j<3;j++)if(Math.abs(A[j][i])>Math.abs(A[m][i]))m=j;[A[i],A[m]]=[A[m],A[i]];[b[i],b[m]]=[b[m],b[i]];if(Math.abs(A[i][i])<1e-8)return null;for(let j=i+1;j<3;j++){const f=A[j][i]/A[i][i];for(let k=i;k<3;k++)A[j][k]-=f*A[i][k];b[j]-=f*b[i]}}const v=[0,0,0];for(let i=2;i>=0;i--)v[i]=(b[i]-A[i].slice(i+1).reduce((s,a,k)=>s+a*v[i+k+1],0))/A[i][i];const cx=-v[0]/2,cy=-v[1]/2;return{cx,cy,r:Math.sqrt(Math.max(0,cx*cx+cy*cy-v[2]))}}function phase(s){if(s<60)return['云遮残月','月有阴晴圆缺，这一笔也有自己的故事。'];if(s<85)return['桂影盈月','很接近十五的月亮了，桂花正为你落下。'];if(s<95)return['人间满月','好圆的一轮月，今夜宜团圆。'];return['月宫画师','天上月圆，人间圆满。你画出了今晚的满月。']}
-function grade(){if(points.length<22){invalid('这一笔太短啦，请画一轮完整的月亮。');return}const ps=resample(points),fit=circleFit(ps),w=cvs.getBoundingClientRect().width;if(!fit||fit.r<w*.18){invalid('月亮画得太小啦，请画得更饱满一些。');return}const avg=ps.reduce((s,p)=>s+Math.hypot(p.x-fit.cx,p.y-fit.cy),0)/ps.length,dev=ps.reduce((s,p)=>s+Math.abs(Math.hypot(p.x-fit.cx,p.y-fit.cy)-avg),0)/ps.length/avg,score=Math.round(Math.max(0,Math.min(100,100-dev*265))*10)/10;outcome={fit,score,dev};const[n,m]=phase(score);scoreEl.innerHTML=score+'<small>分</small>';nameEl.textContent=n;messageEl.textContent=m;roundnessEl.textContent='圆润度唯一评分 · 平均偏差 '+(dev*100).toFixed(1)+'%';light.disabled=false;reveal=0;cancelAnimationFrame(frame);const begin=performance.now();function animate(now){reveal=Math.min(1,(now-begin)/950);paint(reveal);if(reveal<1)frame=requestAnimationFrame(animate);else celebrate(score)}frame=requestAnimationFrame(animate)}
-function invalid(t){outcome=null;scoreEl.textContent='--';nameEl.textContent='今夜，请为思念的人画一轮月';messageEl.textContent=t;roundnessEl.textContent='';light.disabled=true;paint()}function celebrate(s){fallPetals(s>94?36:15);if(s>=85){rabbit.classList.remove('show');void rabbit.offsetWidth;rabbit.classList.add('show')}if(s>=96){goddess.classList.remove('show');void goddess.offsetWidth;goddess.classList.add('show')}}function fallPetals(n){const box=document.querySelector('#blossoms');for(let i=0;i<n;i++){const e=document.createElement('span');e.className='petal';e.textContent='✦';e.style.left=(55+Math.random()*45)+'vw';e.style.setProperty('--x',(-190+Math.random()*160)+'px');e.style.setProperty('--d',(2.4+Math.random()*2.7)+'s');e.style.animationDelay=(Math.random()*.6)+'s';box.append(e);setTimeout(()=>e.remove(),6000)}}function clear(message=true){drawing=false;points=[];outcome=null;reveal=0;cancelAnimationFrame(frame);rabbit.classList.remove('show');goddess.classList.remove('show');scoreEl.textContent='--';nameEl.textContent='今夜，请为思念的人画一轮月';messageEl.textContent=message?'圆润度将由最佳拟合圆计算':'尽量一笔完成，画得饱满一些';roundnessEl.textContent='';note.style.opacity=1;light.disabled=true;paint()}document.querySelector('#reset').onclick=()=>clear(false);
-function skyPaint(){const w=innerWidth,h=innerHeight,ratio=Math.min(2,devicePixelRatio||1);sky.width=w*ratio;sky.height=h*ratio;sctx.setTransform(ratio,0,0,ratio,0,0);const bg=sctx.createLinearGradient(0,0,0,h);bg.addColorStop(0,'#102c58');bg.addColorStop(.52,'#0a1c3a');bg.addColorStop(1,'#061124');sctx.fillStyle=bg;sctx.fillRect(0,0,w,h);for(let i=0;i<105;i++){const x=Math.random()*w,y=Math.random()*h*.7,r=Math.random()*1.1+.2;sctx.fillStyle=`rgba(255,244,204,${.15+Math.random()*.65})`;sctx.beginPath();sctx.arc(x,y,r,0,7);sctx.fill()}}
-function card(){const c=document.querySelector('#shareCard'),x=c.getContext('2d'),w=c.width,h=c.height,g=x.createLinearGradient(0,0,0,h);g.addColorStop(0,'#1a477f');g.addColorStop(.65,'#0a1c3a');g.addColorStop(1,'#061124');x.fillStyle=g;x.fillRect(0,0,w,h);for(let i=0;i<130;i++){x.fillStyle='rgba(255,245,208,.7)';x.beginPath();x.arc(Math.random()*w,Math.random()*h*.73,Math.random()*1.7+.4,0,7);x.fill()}const{fit,score}=outcome,sc=2.95,cx=w/2,cy=570,r=fit.r*sc;x.shadowColor='#ffcb60';x.shadowBlur=65;x.fillStyle='#ffe3a0';x.beginPath();x.arc(cx,cy,r,0,7);x.fill();x.shadowBlur=0;x.save();x.translate(cx-fit.cx*sc,cy-fit.cy*sc);x.scale(sc,sc);x.strokeStyle='#a8772e';x.lineWidth=4.4;x.lineCap='round';x.lineJoin='round';x.beginPath();x.moveTo(points[0].x,points[0].y);points.slice(1).forEach(p=>x.lineTo(p.x,p.y));x.stroke();x.restore();const[n]=phase(score);x.textAlign='center';x.fillStyle='#fff0bd';x.font='48px serif';x.fillText('中秋画月挑战',cx,120);x.fillStyle='#ffdf8d';x.font='700 82px serif';x.fillText(score+' 分',cx,1060);x.fillStyle='#fff0bd';x.font='600 42px serif';x.fillText(n,cx,1135);x.fillStyle='#d5dfed';x.font='31px serif';x.fillText('我把这轮月亮，送给想念的人。',cx,1212);x.fillStyle='rgba(255,226,154,.72)';x.font='25px serif';x.fillText('一笔一月 · 团圆常在',cx,1282)}
-const modal=document.querySelector('#modal');light.onclick=()=>{if(!outcome)return;card();modal.classList.add('show')};document.querySelector('#close').onclick=()=>modal.classList.remove('show');document.querySelector('#save').onclick=()=>{const a=document.createElement('a');a.download='我的中秋月亮卡.png';a.href=document.querySelector('#shareCard').toDataURL('image/png');a.click()};window.addEventListener('resize',()=>{skyPaint();resize()});skyPaint();resize();
+'use strict';
+// 算法版本、所有评分权重及阈值集中配置；调参后后端应同步版本。
+const SCORE_CONFIG = Object.freeze({
+ version:'moon-1.0.0', debug:new URLSearchParams(location.search).has('debug'),
+ radialWeight:.55, closureWeight:.15, coverageWeight:.12,
+ lengthWeight:.08, directionWeight:.05, shapeWeight:.05,
+ sampleCount:240, minPoints:16, minUniquePoints:12,
+ sampleGapRatio:.0015, cleanGapRatio:.0004, minLengthRatio:.55,
+ minRadiusRatio:.10, maxRadiusRatio:1.3, minCoverage:.70,
+ minAxisRatio:.045, maxNetTurns:1.35, maxTravelTurns:1.65,
+ maxLengthRatio:1.85, maxReverseFraction:.28, reverseRunAngle:.12,
+ maxReverseRuns:8, angleBins:72, epsilon:1e-10,
+ radialScale:.18, closureScale:.22, lengthScale:.28,
+ directionScale:.13, shapeScale:.36,
+ coverageStart:.65, coverageFull:.985,
+ closureGateScale:.65, coverageGateStart:.65,
+ radialGateScale:.36, lengthGateScale:.85,
+ maxPoints:16000, maxDurationMs:60000
+});
+const $ = id => document.getElementById(id);
+const canvas=$('canvas'), ctx=canvas.getContext('2d');
+const TAU=Math.PI*2, clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+const state={width:0,height:0,dpr:1,points:[],active:null,inputBlocked:false,start:0,duration:0,
+ result:null,frame:0,dirty:true,submitting:false,submitted:false,pendingResize:false,uiState:'ready'};
+const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
 
-// 结果月亮直接悬浮于星空：按得分选择月面表情，并精确跟随拟合圆的大小和位置。
-const moonEmoji=document.createElement('span');
-moonEmoji.className='moon-emoji';
-document.querySelector('.mirror').append(moonEmoji);
-note.textContent='在星空中，一笔画出满月';
-const scoreMoon=grade, resetMoon=clear;
-grade=function(){
-  scoreMoon();
-  if(!outcome) return;
-  const {fit,score}=outcome;
-  moonEmoji.textContent=score>=80?'🌕':'🌝';
-  moonEmoji.style.left=fit.cx+'px';
-  moonEmoji.style.top=fit.cy+'px';
-  moonEmoji.style.fontSize=(fit.r*2.1)+'px';
-  moonEmoji.classList.remove('show');
-  setTimeout(()=>{ if(outcome && outcome.fit===fit) moonEmoji.classList.add('show'); },850);
+// ---------- 三语界面：选择保存在本机，首次访问按浏览器语言推断 ----------
+const I18N={
+ 'zh-CN':{
+  languageLabel:'语言',stageLabel:'画月区域',title:'一笔画月挑战',subtitle:'在星空中，一笔画出属于你的中秋明月',canvasLabel:'用一根手指或鼠标，连续画出一轮圆月',canvasFallback:'你的浏览器不支持 Canvas，请使用较新的浏览器。',hintMain:'请用一根手指，一笔画出圆月',hintSub:'不必匆忙 · 圆满自有时',scoreLabel:'圆度得分',time:'本次用时 {seconds} 秒',reset:'重新画月',submit:'提交成绩',seal:'月圆人团圆 · 一笔寄相思',dialogTitle:'为这轮月，留个名字',nicknameHelp:'最多 12 个中文字符或 24 个普通字符；混合输入按长度折算。当前为提交演示。',nicknameLabel:'你的昵称',nicknamePlaceholder:'例如：追月的人',back:'返回',prepare:'准备提交',preparing:'准备中…',submittedButton:'已准备提交',
+  ready:'月尚未满，静候你的一笔。',scoreHint:'用时不影响得分，顺时针、逆时针皆可。',stageReady:'一笔成月 · 松手揭晓',drawing:'月光正沿着你的指尖流淌……',stageDrawing:'正在画月 · 松手揭晓',cancelHint:'本次未计分，重新落笔即可开始。',stageInterrupted:'触控已中断 · 请重新画月',invalidHint:'本次未计分，请用一笔画出完整的一轮月亮。',fitNote:'金线是你的月 · 蓝色虚线为拟合圆',tryAgain:'重新落笔，即可再次挑战',submitted:'成绩已准备提交',demo:'演示模式：数据已输出到控制台，尚未发送至排行榜。',
+  invalidFit:'这轮月的轨迹没能辨认，再试一次吧！',smallMoon:'月亮有点小，请画得更大一些。',fullMoon:'请用一笔画出完整的一轮月亮。',tooMany:'你似乎画了不止一圈，或有较多折返，请重新挑战。',notClosed:'这弯月还没有合拢，再试一次吧！',messy:'轨迹有些凌乱，请沿同一方向画出一轮月亮。',badData:'轨迹数据异常，请重新画月。',slowComplete:'请慢慢画出完整的一轮月亮。',tooShort:'轨迹有点短，请画得更大、更完整一些。',line:'这更像一道月光，请画出完整的圆月。',resize:'画布尺寸已变化，请重新画一轮月亮。',boundary:'手指离开了画布，请重新画一轮月亮。',tooLong:'这一笔有点长，请重新画一轮月亮。',multi:'请只用一根手指画月。',timeout:'这一笔有点久，休息一下再画月吧。',pointerCancel:'触控被中断，请重新画月。',captureLost:'触控连接已中断，请重新画月。',blur:'页面失去焦点，请重新画月。',hidden:'页面已切换，请重新画月。',rotate:'屏幕已旋转，请重新画月。',
+  eval95:'月满无缺，堪称画月大师！',eval90:'一轮好月，几近圆满。',eval80:'月色正好，只差一缕圆满。',eval70:'略有云遮，但仍是一轮好月。',eval60:'像一轮被秋风吹歪的月亮。',eval0:'今夜月相奇特，不妨再画一次。',similarity:'你画出来的月，竟与中秋的月亮有{score}相似。',nicknameEmpty:'请先留下你的昵称。',nicknameLong:'昵称太长：最多 12 个中文字符或 24 个普通字符。',nicknameLongShort:'昵称过长，请缩短一些。',submitFailed:'准备失败，请重试。'
+ },
+ 'zh-TW':{
+  languageLabel:'語言',stageLabel:'畫月區域',title:'一筆畫月挑戰',subtitle:'在星空中，一筆畫出屬於你的中秋明月',canvasLabel:'用一根手指或滑鼠，連續畫出一輪圓月',canvasFallback:'你的瀏覽器不支援 Canvas，請使用較新的瀏覽器。',hintMain:'請用一根手指，一筆畫出圓月',hintSub:'不必匆忙 · 圓滿自有時',scoreLabel:'圓度得分',time:'本次用時 {seconds} 秒',reset:'重新畫月',submit:'提交成績',seal:'月圓人團圓 · 一筆寄相思',dialogTitle:'為這輪月，留個名字',nicknameHelp:'最多 12 個中文字元或 24 個一般字元；混合輸入按長度折算。目前為提交示範。',nicknameLabel:'你的暱稱',nicknamePlaceholder:'例如：追月的人',back:'返回',prepare:'準備提交',preparing:'準備中…',submittedButton:'已準備提交',
+  ready:'月尚未滿，靜候你的一筆。',scoreHint:'用時不影響得分，順時針、逆時針皆可。',stageReady:'一筆成月 · 放開揭曉',drawing:'月光正沿著你的指尖流淌……',stageDrawing:'正在畫月 · 放開揭曉',cancelHint:'本次未計分，重新落筆即可開始。',stageInterrupted:'觸控已中斷 · 請重新畫月',invalidHint:'本次未計分，請用一筆畫出完整的一輪月亮。',fitNote:'金線是你的月 · 藍色虛線為擬合圓',tryAgain:'重新落筆，即可再次挑戰',submitted:'成績已準備提交',demo:'示範模式：資料已輸出至控制台，尚未傳送至排行榜。',
+  invalidFit:'這輪月的軌跡沒能辨認，再試一次吧！',smallMoon:'月亮有點小，請畫得更大一些。',fullMoon:'請用一筆畫出完整的一輪月亮。',tooMany:'你似乎畫了不止一圈，或有較多折返，請重新挑戰。',notClosed:'這彎月還沒有合攏，再試一次吧！',messy:'軌跡有些凌亂，請沿同一方向畫出一輪月亮。',badData:'軌跡資料異常，請重新畫月。',slowComplete:'請慢慢畫出完整的一輪月亮。',tooShort:'軌跡有點短，請畫得更大、更完整一些。',line:'這更像一道月光，請畫出完整的圓月。',resize:'畫布尺寸已變更，請重新畫一輪月亮。',boundary:'手指離開了畫布，請重新畫一輪月亮。',tooLong:'這一筆有點長，請重新畫一輪月亮。',multi:'請只用一根手指畫月。',timeout:'這一筆有點久，休息一下再畫月吧。',pointerCancel:'觸控被中斷，請重新畫月。',captureLost:'觸控連線已中斷，請重新畫月。',blur:'頁面失去焦點，請重新畫月。',hidden:'頁面已切換，請重新畫月。',rotate:'螢幕已旋轉，請重新畫月。',
+  eval95:'月滿無缺，堪稱畫月大師！',eval90:'一輪好月，幾近圓滿。',eval80:'月色正好，只差一縷圓滿。',eval70:'略有雲遮，但仍是一輪好月。',eval60:'像一輪被秋風吹歪的月亮。',eval0:'今夜月相奇特，不妨再畫一次。',similarity:'你畫出來的月，竟與中秋的月亮有{score}相似。',nicknameEmpty:'請先留下你的暱稱。',nicknameLong:'暱稱太長：最多 12 個中文字元或 24 個一般字元。',nicknameLongShort:'暱稱過長，請縮短一些。',submitFailed:'準備失敗，請重試。'
+ },
+ en:{
+  languageLabel:'Language',stageLabel:'Moon drawing area',title:'One-Stroke Moon Challenge',subtitle:'Draw your own Mid-Autumn moon across the night sky in one stroke',canvasLabel:'Draw a full moon in one continuous stroke with one finger or a mouse',canvasFallback:'Your browser does not support Canvas. Please use a newer browser.',hintMain:'Draw a full moon with one finger in a single stroke',hintSub:'Take your time · Wholeness comes in its own time',scoreLabel:'Roundness score',time:'Time: {seconds} s',reset:'Draw again',submit:'Submit score',seal:'Under the full moon, we gather · One stroke carries our thoughts',dialogTitle:'Give this moon a name',nicknameHelp:'Up to 12 CJK characters or 24 regular characters. Mixed input uses weighted length. Submission is currently a demo.',nicknameLabel:'Nickname',nicknamePlaceholder:'e.g. Moon Chaser',back:'Back',prepare:'Prepare submission',preparing:'Preparing…',submittedButton:'Ready to submit',
+  ready:'The moon awaits your first stroke.',scoreHint:'Time does not affect your score. Draw clockwise or counterclockwise.',stageReady:'One stroke · Release to reveal',drawing:'Moonlight is flowing from your fingertip…',stageDrawing:'Drawing · Release to reveal',cancelHint:'This attempt was not scored. Start a new stroke to try again.',stageInterrupted:'Touch interrupted · Please draw again',invalidHint:'This attempt was not scored. Draw a complete moon in one stroke.',fitNote:'Gold is your stroke · Blue dashes show the fitted circle',tryAgain:'Start a new stroke to try again',submitted:'Your score is ready to submit',demo:'Demo mode: the data was logged to the console and was not sent to the leaderboard.',
+  invalidFit:'We could not recognize this moon. Please try again.',smallMoon:'This moon is a little small. Please draw it larger.',fullMoon:'Please draw a complete moon in one stroke.',tooMany:'It looks like you drew more than one loop or reversed too often. Please try again.',notClosed:'This moon is still open. Try closing the circle.',messy:'The stroke is a little tangled. Draw one loop in a consistent direction.',badData:'The stroke data is invalid. Please draw again.',slowComplete:'Draw a complete moon a little more slowly.',tooShort:'The stroke is too short. Draw a larger, more complete moon.',line:'That looks more like a ray of moonlight. Please draw a full moon.',resize:'The canvas size changed. Please draw the moon again.',boundary:'Your finger left the canvas. Please draw the moon again.',tooLong:'That stroke was too long. Please draw the moon again.',multi:'Please draw with one finger only.',timeout:'That stroke took a while. Take a break and try again.',pointerCancel:'Touch was interrupted. Please draw again.',captureLost:'The touch connection was interrupted. Please draw again.',blur:'The page lost focus. Please draw again.',hidden:'The page changed or was hidden. Please draw again.',rotate:'The screen rotated. Please draw again.',
+  eval95:'A flawless full moon—you are a moon-drawing master!',eval90:'A beautiful moon, nearly perfect.',eval80:'Lovely moonlight, just a touch from perfect.',eval70:'A few passing clouds, but still a fine moon.',eval60:'A moon gently bent by the autumn wind.',eval0:'A curious moon tonight—why not try once more?',similarity:'Your moon is {score}% as round as the Mid-Autumn moon.',nicknameEmpty:'Please enter your nickname.',nicknameLong:'Nickname is too long: use up to 12 CJK characters or 24 regular characters.',nicknameLongShort:'Nickname is too long. Please shorten it.',submitFailed:'Could not prepare the submission. Please try again.'
+ }
 };
-clear=function(...args){
-  moonEmoji.classList.remove('show');
-  moonEmoji.textContent='';
-  return resetMoon(...args);
-};
-</script></body></html>
+function detectLanguage(){
+ try{const saved=localStorage.getItem('moon-language');if(I18N[saved]) return saved;}catch(_error){}
+ const languages=navigator.languages||[navigator.language||'zh-CN'];
+ if(languages.some(v=>/^(zh-(TW|HK|MO)|yue)/i.test(v))) return 'zh-TW';
+ if(languages.some(v=>/^zh/i.test(v))) return 'zh-CN';
+ return 'en';
+}
+let currentLanguage=detectLanguage();
+function t(key,vars={}){let value=I18N[currentLanguage][key]??I18N['zh-CN'][key]??key;for(const [name,replacement] of Object.entries(vars)) value=value.replaceAll(`{${name}}`,replacement);return value;}
+function setLanguage(language){
+ if(!I18N[language]) return;currentLanguage=language;
+ try{localStorage.setItem('moon-language',language);}catch(_error){}
+ applyLanguage();
+}
+function applyLanguage(){
+ document.documentElement.lang=currentLanguage;document.title=t('title');$('languageSelect').value=currentLanguage;
+ const textMap={languageLabel:'languageLabel',mainTitle:'title',subtitle:'subtitle',hintMain:'hintMain',hintSub:'hintSub',scoreLabel:'scoreLabel',reset:'reset',seal:'seal',dialogTitle:'dialogTitle',nicknameHelp:'nicknameHelp',nicknameLabel:'nicknameLabel',closeModal:'back'};
+ for(const [id,key] of Object.entries(textMap)) $(id).textContent=t(key);
+ $('stage').setAttribute('aria-label',t('stageLabel'));canvas.setAttribute('aria-label',t('canvasLabel'));canvas.textContent=t('canvasFallback');$('nickname').placeholder=t('nicknamePlaceholder');
+ $('confirmSubmit').textContent=state.submitting?t('preparing'):t('prepare');$('submit').textContent=state.submitted?t('submittedButton'):t('submit');
+ $('timer').textContent=t('time',{seconds:(state.duration/1000).toFixed(1)});
+ if(state.uiState==='result'&&state.result) updateResultUI();
+ else if(state.uiState==='drawing'){$('verdict').textContent=t('drawing');$('poem').textContent=t('scoreHint');$('stageNote').textContent=t('stageDrawing');}
+ else if(state.uiState==='cancelled'){$('verdict').textContent=t(state.cancelKey||'pointerCancel');$('poem').textContent=t('cancelHint');$('stageNote').textContent=t('stageInterrupted');}
+ else if(state.uiState==='submitted'){$('verdict').textContent=t('submitted');$('poem').textContent=t('demo');$('stageNote').textContent=t('fitNote');}
+ else{$('verdict').textContent=t('ready');$('poem').textContent=t('scoreHint');$('stageNote').textContent=t('stageReady');}
+ const cleaned=cleanNickname($('nickname').value);$('nicknameError').textContent=cleaned&&nicknameLength(cleaned)>24?t('nicknameLongShort'):'';
+}
+
+
+// ---------- 轨迹清洗与等弧长重采样（不把首尾强行连接） ----------
+function cleanPoints(points,gap){
+ const out=[];
+ for(const p of points){
+  if(!Number.isFinite(p.x)||!Number.isFinite(p.y)||!Number.isFinite(p.t)) continue;
+  if(!out.length||distance(p,out[out.length-1])>=gap) out.push({...p});
+ }
+ const last=points[points.length-1];
+ if(last&&out.length&&Number.isFinite(last.x)&&Number.isFinite(last.y)&&Number.isFinite(last.t)&&distance(last,out[out.length-1])>SCORE_CONFIG.epsilon) out.push({...last});
+ return out;
+}
+function pathLength(points){let length=0;for(let i=1;i<points.length;i++) length+=distance(points[i-1],points[i]);return length;}
+function resampleByArcLength(points,count){
+ const cumulative=[0];
+ for(let i=1;i<points.length;i++) cumulative.push(cumulative[i-1]+distance(points[i-1],points[i]));
+ const total=cumulative[cumulative.length-1];
+ if(!(total>0)) return [];
+ const out=[];let j=1;
+ for(let i=0;i<count;i++){
+  const target=total*i/(count-1);
+  while(j<cumulative.length-1&&cumulative[j]<target) j++;
+  const a=points[j-1],b=points[j],span=cumulative[j]-cumulative[j-1];
+  const u=span>0?clamp((target-cumulative[j-1])/span):0;
+  out.push({x:a.x+(b.x-a.x)*u,y:a.y+(b.y-a.y)*u,t:a.t+(b.t-a.t)*u});
+ }
+ return out;
+}
+// 带部分主元的 3×3 高斯消元；奇异矩阵直接拒绝。
+function solve3(matrix,vector){
+ const a=matrix.map((row,i)=>[...row,vector[i]]);
+ for(let col=0;col<3;col++){
+  let pivot=col;for(let i=col+1;i<3;i++) if(Math.abs(a[i][col])>Math.abs(a[pivot][col])) pivot=i;
+  if(Math.abs(a[pivot][col])<SCORE_CONFIG.epsilon) return null;
+  [a[col],a[pivot]]=[a[pivot],a[col]];
+  const divisor=a[col][col];for(let j=col;j<4;j++) a[col][j]/=divisor;
+  for(let i=0;i<3;i++) if(i!==col){const factor=a[i][col];for(let j=col;j<4;j++) a[i][j]-=factor*a[col][j];}
+ }
+ return a.map(row=>row[3]);
+}
+function covarianceAxisRatio(points){
+ const n=points.length,mx=points.reduce((s,p)=>s+p.x,0)/n,my=points.reduce((s,p)=>s+p.y,0)/n;
+ let xx=0,yy=0,xy=0;
+ for(const p of points){const x=p.x-mx,y=p.y-my;xx+=x*x;yy+=y*y;xy+=x*y;}
+ const trace=xx+yy,delta=Math.hypot(xx-yy,2*xy);
+ return (trace-delta)/Math.max(trace+delta,SCORE_CONFIG.epsilon);
+}
+function fitCircle(points){
+ // 先平移到质心并按 RMS 尺度归一化，避免大坐标正规方程病态。
+ const n=points.length,mx=points.reduce((s,p)=>s+p.x,0)/n,my=points.reduce((s,p)=>s+p.y,0)/n;
+ const scale=Math.sqrt(points.reduce((s,p)=>s+(p.x-mx)**2+(p.y-my)**2,0)/n);
+ if(!(scale>SCORE_CONFIG.epsilon)) return null;
+ const q=points.map(p=>({x:(p.x-mx)/scale,y:(p.y-my)/scale}));
+ const matrix=[[0,0,0],[0,0,0],[0,0,0]],vector=[0,0,0];
+ for(const p of q){const row=[p.x,p.y,1],z=-(p.x*p.x+p.y*p.y);for(let i=0;i<3;i++){vector[i]+=row[i]*z;for(let j=0;j<3;j++) matrix[i][j]+=row[i]*row[j];}}
+ const solution=solve3(matrix,vector);if(!solution) return null;
+ let cx=-solution[0]/2,cy=-solution[1]/2,r2=cx*cx+cy*cy-solution[2];
+ if(!(r2>0)) return null;let r=Math.sqrt(r2);
+ // 代数解之后做少量几何最小二乘迭代，直接减小径向残差。
+ for(let iteration=0;iteration<5;iteration++){
+  const h=[[0,0,0],[0,0,0],[0,0,0]],g=[0,0,0];let oldLoss=0;
+  for(const p of q){const d=Math.hypot(cx-p.x,cy-p.y);if(d<SCORE_CONFIG.epsilon) continue;const e=d-r,jac=[(cx-p.x)/d,(cy-p.y)/d,-1];oldLoss+=e*e;for(let i=0;i<3;i++){g[i]-=jac[i]*e;for(let j=0;j<3;j++) h[i][j]+=jac[i]*jac[j];}}
+  const step=solve3(h,g);if(!step) break;
+  const nx=cx+step[0],ny=cy+step[1],nr=r+step[2];
+  const loss=q.reduce((s,p)=>s+(Math.hypot(p.x-nx,p.y-ny)-nr)**2,0);
+  if(!(nr>0)||!Number.isFinite(loss)||loss>oldLoss) break;
+  cx=nx;cy=ny;r=nr;
+ }
+ return {cx:mx+cx*scale,cy:my+cy*scale,r:r*scale};
+}
+function computeMetrics(points,circle){
+ const {cx,cy,r}=circle,n=points.length;
+ let squared=0,area2=0;const angles=[];
+ for(let i=0;i<n;i++){
+  const p=points[i],next=points[(i+1)%n];
+  squared+=(Math.hypot(p.x-cx,p.y-cy)-r)**2;
+  area2+=(p.x-cx)*(next.y-cy)-(next.x-cx)*(p.y-cy);
+  angles.push(Math.atan2(p.y-cy,p.x-cx));
+ }
+ const bins=new Uint8Array(SCORE_CONFIG.angleBins),deltas=[];
+ const mark=a=>{bins[Math.floor((((a%TAU)+TAU)%TAU)/TAU*bins.length)%bins.length]=1;};
+ let net=0,travel=0,positive=0,negative=0;
+ mark(angles[0]);
+ for(let i=1;i<n;i++){
+  const delta=Math.atan2(Math.sin(angles[i]-angles[i-1]),Math.cos(angles[i]-angles[i-1]));
+  deltas.push(delta);net+=delta;travel+=Math.abs(delta);
+  if(delta>=0) positive+=delta;else negative-=delta;
+  // 标记真实相邻线段扫过的角度，不填补首尾缺口。
+  const steps=Math.max(1,Math.ceil(Math.abs(delta)/TAU*bins.length*2));
+  for(let k=1;k<=steps;k++) mark(angles[i-1]+delta*k/steps);
+ }
+ const sign=net>=0?1:-1;let reverseRun=0,reverseRuns=0;
+ for(const delta of [...deltas,sign]){
+  if(delta*sign<0) reverseRun+=Math.abs(delta);
+  else{if(reverseRun>=SCORE_CONFIG.reverseRunAngle) reverseRuns++;reverseRun=0;}
+ }
+ const length=pathLength(points),closure=distance(points[0],points[n-1]),perimeter=length+closure;
+ const reverseFraction=Math.min(positive,negative)/Math.max(travel,SCORE_CONFIG.epsilon);
+ return {
+  radialError:Math.sqrt(squared/n)/r,closureError:closure/(2*r),
+  coverage:bins.reduce((a,b)=>a+b,0)/bins.length,lengthRatio:length/(TAU*r),
+  directionConsistency:Math.abs(net)/Math.max(travel,SCORE_CONFIG.epsilon),
+  circularity:clamp(4*Math.PI*Math.abs(area2/2)/(perimeter*perimeter)),
+  netTurns:Math.abs(net)/TAU,travelTurns:travel/TAU,reverseFraction,reverseRuns
+ };
+}
+function invalidReason(points,circle,metrics,width,height){
+ const c=SCORE_CONFIG,short=Math.min(width,height);
+ if(!circle||!Object.values(circle).every(Number.isFinite)||!metrics||!Object.values(metrics).every(Number.isFinite)) return 'invalidFit';
+ if(circle.r<short*c.minRadiusRatio) return 'smallMoon';
+ if(circle.r>Math.hypot(width,height)*c.maxRadiusRatio) return 'fullMoon';
+ if(metrics.netTurns>c.maxNetTurns||metrics.travelTurns>c.maxTravelTurns) return 'tooMany';
+ if(metrics.coverage<c.minCoverage) return 'notClosed';
+ if(metrics.reverseFraction>c.maxReverseFraction||metrics.reverseRuns>c.maxReverseRuns||metrics.lengthRatio>c.maxLengthRatio) return 'messy';
+ return '';
+}
+const smoothstep=(a,b,x)=>{const t=clamp((x-a)/(b-a));return t*t*(3-2*t);};
+function metricsToScore(m){
+ const c=SCORE_CONFIG;
+ // 平滑平方指数：零点处斜率为 0，容忍轻微误差，大误差快速降分。
+ const quality=(error,scale)=>Math.exp(-((error/scale)**2));
+ const scores={
+  radialScore:100*quality(m.radialError,c.radialScale),
+  closureScore:100*quality(m.closureError,c.closureScale),
+  coverageScore:100*smoothstep(c.coverageStart,c.coverageFull,m.coverage),
+  lengthScore:100*quality(Math.abs(m.lengthRatio-1),c.lengthScale),
+  directionScore:100*quality(1-m.directionConsistency,c.directionScale),
+  shapeScore:100*quality(1-m.circularity,c.shapeScale)
+ };
+ const weighted=scores.radialScore*c.radialWeight+scores.closureScore*c.closureWeight+scores.coverageScore*c.coverageWeight+scores.lengthScore*c.lengthWeight+scores.directionScore*c.directionWeight+scores.shapeScore*c.shapeWeight;
+ const weightSum=c.radialWeight+c.closureWeight+c.coverageWeight+c.lengthWeight+c.directionWeight+c.shapeWeight;
+ // 完整性门控避免“很圆的开口弧”或明显椭圆被其余满分项托高。
+ const gate=quality(m.closureError,c.closureGateScale)*smoothstep(c.coverageGateStart,c.coverageFull,m.coverage)*quality(m.radialError,c.radialGateScale)*quality(Math.abs(m.lengthRatio-1),c.lengthGateScale);
+ return {subscores:scores,score:Math.round(clamp(weighted/weightSum*gate,0,100)*10)/10};
+}
+function analyzeTrajectory(raw,width,height){
+ const c=SCORE_CONFIG,short=Math.min(width,height),fail=reasonKey=>({valid:false,reasonKey});
+ if(!(short>0)||raw.some(p=>![p.x,p.y,p.t].every(Number.isFinite))) return fail('badData');
+ const clean=cleanPoints(raw,short*c.cleanGapRatio);
+ if(clean.length<c.minPoints) return fail('slowComplete');
+ const unique=new Set(clean.map(p=>`${Math.round(p.x/(short*c.cleanGapRatio))},${Math.round(p.y/(short*c.cleanGapRatio))}`));
+ if(unique.size<c.minUniquePoints||pathLength(clean)<short*c.minLengthRatio) return fail('tooShort');
+ const points=resampleByArcLength(clean,c.sampleCount);
+ if(covarianceAxisRatio(points)<c.minAxisRatio) return fail('line');
+ const circle=fitCircle(points),metrics=circle?computeMetrics(points,circle):null;
+ const reasonKey=invalidReason(points,circle,metrics,width,height);
+ if(reasonKey) return {...fail(reasonKey),circle,metrics};
+ return {valid:true,points,circle,metrics,...metricsToScore(metrics)};
+}
+
+// ---------- Canvas 尺寸、输入和生命周期 ----------
+function scheduleDraw(){state.dirty=true;if(!state.frame) state.frame=requestAnimationFrame(renderFrame);}
+function resizeCanvas(){
+ if(!$('modal').hidden){state.pendingResize=true;return;}
+ const rect=canvas.getBoundingClientRect(),width=rect.width,height=rect.height,dpr=window.devicePixelRatio||1;
+ if(width<=0||height<=0) return;
+ if(Math.abs(width-state.width)<.1&&Math.abs(height-state.height)<.1&&dpr===state.dpr) return;
+ const hadDrawing=state.active!==null||state.points.length>0;
+ resetGame(hadDrawing?'resize':'ready');
+ state.width=width;state.height=height;state.dpr=dpr;
+ // 每次根据 CSS 逻辑尺寸重新赋值，不在原 backing store 上累乘 DPR。
+ canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);
+ ctx.setTransform(canvas.width/width,0,0,canvas.height/height,0,0);
+ scheduleDraw();
+}
+function releasePointer(){
+ const id=state.active;state.active=null;
+ try{if(typeof id==='number'&&canvas.hasPointerCapture&&canvas.hasPointerCapture(id)) canvas.releasePointerCapture(id);}catch(_error){}
+}
+function resetGame(messageKey='ready'){
+ releasePointer();state.points=[];state.result=null;state.duration=0;state.submitted=false;state.uiState='ready';state.cancelKey=null;
+ $('score').textContent='—';$('timer').textContent=t('time',{seconds:'0.0'});
+ $('verdict').textContent=t(messageKey);$('poem').textContent=t('scoreHint');
+ $('hint').hidden=false;$('submit').disabled=true;$('submit').textContent=t('submit');
+ $('stageNote').textContent=t('stageReady');$('ripple').classList.remove('play');scheduleDraw();
+}
+function cancelDrawing(messageKey){
+ if(state.active===null) return;
+ state.duration=performance.now()-state.start;releasePointer();state.result=null;state.uiState='cancelled';state.cancelKey=messageKey;
+ $('verdict').textContent=t(messageKey);$('poem').textContent=t('cancelHint');
+ $('submit').disabled=true;$('stageNote').textContent=t('stageInterrupted');scheduleDraw();
+}
+function logicalPoint(event){
+ const rect=canvas.getBoundingClientRect();
+ return {x:(event.clientX-rect.left)*state.width/rect.width,y:(event.clientY-rect.top)*state.height/rect.height,t:Math.max(0,performance.now()-state.start)};
+}
+function inside(p){return p.x>=0&&p.y>=0&&p.x<=state.width&&p.y<=state.height;}
+function appendPoint(event,force=false){
+ const p=logicalPoint(event);
+ if(!inside(p)){cancelDrawing('boundary');return false;}
+ const last=state.points[state.points.length-1];
+ if(!last||distance(last,p)>=Math.min(state.width,state.height)*SCORE_CONFIG.sampleGapRatio||(force&&distance(last,p)>SCORE_CONFIG.epsilon)) state.points.push(p);
+ if(state.points.length>SCORE_CONFIG.maxPoints){cancelDrawing('tooLong');return false;}
+ scheduleDraw();return true;
+}
+function startStroke(event){
+ if(!$('modal').hidden||state.submitting||state.inputBlocked||!state.width) return;
+ if(event.button!==undefined&&event.button!==0) return;
+ if(state.active!==null){cancelDrawing('multi');return;}
+ if(event.isPrimary===false) return;
+ if(event.cancelable) event.preventDefault();
+ resetGame();state.start=performance.now();state.active=event.pointerId;state.uiState='drawing';
+ $('hint').hidden=true;$('verdict').textContent=t('drawing');
+ $('stageNote').textContent=t('stageDrawing');
+ try{if(typeof event.pointerId==='number'&&canvas.setPointerCapture) canvas.setPointerCapture(event.pointerId);}catch(_error){}
+ appendPoint(event,true);
+}
+function moveStroke(event){
+ if(event.pointerId!==state.active) return;
+ if(event.cancelable) event.preventDefault();
+ const samples=event.getCoalescedEvents?event.getCoalescedEvents():[];
+ for(const sample of samples) if(!appendPoint(sample)) return;
+ // 个别浏览器返回空 coalesced 列表，仍记录主事件。
+ appendPoint(event);
+}
+function finishStroke(event){
+ if(event.pointerId!==state.active) return;
+ if(event.cancelable) event.preventDefault();
+ if(!appendPoint(event,true)||state.active===null) return;
+ state.duration=performance.now()-state.start;releasePointer();
+ const result=analyzeTrajectory(state.points,state.width,state.height);
+ state.result={...result,width:state.width,height:state.height,durationMs:Math.round(state.duration),createdAt:new Date().toISOString()};
+ state.uiState='result';
+ if(SCORE_CONFIG.debug){console.group('画月评分');console.log('拟合圆',result.circle);console.table(result.metrics||{});console.table(result.subscores||{});console.log('最终分数',result.score,'有效',result.valid,result.reasonKey?t(result.reasonKey):'');console.groupEnd();}
+ updateResultUI();scheduleDraw();
+}
+function bindInputEvents(){
+ if(window.PointerEvent){
+  const heldPointers=new Set();
+  document.addEventListener('pointerdown',event=>{
+   heldPointers.add(event.pointerId);
+   if(heldPointers.size>1){state.inputBlocked=true;if(state.active!==null){if(event.cancelable) event.preventDefault();cancelDrawing('multi');}}
+  },{capture:true,passive:false});
+  const releaseHeld=event=>{heldPointers.delete(event.pointerId);if(!heldPointers.size) state.inputBlocked=false;};
+  window.addEventListener('pointerup',releaseHeld,true);
+  window.addEventListener('pointercancel',releaseHeld,true);
+  window.addEventListener('blur',()=>{heldPointers.clear();state.inputBlocked=false;});
+  canvas.addEventListener('pointerdown',startStroke);
+  window.addEventListener('pointermove',moveStroke,{passive:false});
+  window.addEventListener('pointerup',finishStroke,{passive:false});
+  window.addEventListener('pointercancel',event=>{if(event.pointerId===state.active) cancelDrawing('pointerCancel');});
+  canvas.addEventListener('lostpointercapture',event=>{if(event.pointerId===state.active) cancelDrawing('captureLost');});
+ }else{
+  // 老浏览器 Touch Events 回退：不同时注册另一套 Pointer 采样。
+  const wrap=(event,touch)=>({clientX:touch.clientX,clientY:touch.clientY,pointerId:`touch-${touch.identifier}`,cancelable:event.cancelable,preventDefault:()=>event.preventDefault()});
+  document.addEventListener('touchstart',event=>{if(event.touches.length>1&&state.active!==null){event.preventDefault();cancelDrawing('multi');}},{capture:true,passive:false});
+  canvas.addEventListener('touchstart',event=>{if(event.touches.length===1) startStroke(wrap(event,event.changedTouches[0]));},{passive:false});
+  window.addEventListener('touchmove',event=>{for(const touch of event.changedTouches) moveStroke(wrap(event,touch));},{passive:false});
+  window.addEventListener('touchend',event=>{for(const touch of event.changedTouches) finishStroke(wrap(event,touch));},{passive:false});
+  window.addEventListener('touchcancel',()=>cancelDrawing('pointerCancel'));
+  if(!('ontouchstart' in window)){
+   const mouse=event=>({clientX:event.clientX,clientY:event.clientY,button:event.button,pointerId:'mouse',cancelable:event.cancelable,preventDefault:()=>event.preventDefault()});
+   canvas.addEventListener('mousedown',event=>startStroke(mouse(event)));
+   window.addEventListener('mousemove',event=>moveStroke(mouse(event)));
+   window.addEventListener('mouseup',event=>finishStroke(mouse(event)));
+  }
+ }
+ canvas.addEventListener('contextmenu',event=>event.preventDefault());
+ // 补足旧版移动浏览器 touch-action/overscroll 行为。
+ $('stage').addEventListener('touchmove',event=>event.preventDefault(),{passive:false});
+ window.addEventListener('blur',()=>cancelDrawing('blur'));
+ document.addEventListener('visibilitychange',()=>{if(document.hidden) cancelDrawing('hidden');});
+}
+
+// ---------- 平滑绘制，仅影响显示；评分仍使用轨迹坐标 ----------
+function drawCanvas(){
+ ctx.clearRect(0,0,state.width,state.height);
+ const circle=state.result?.valid?state.result.circle:null;
+ if(circle){ctx.save();ctx.strokeStyle='rgba(183,207,237,.30)';ctx.lineWidth=1;ctx.setLineDash([4,7]);ctx.beginPath();ctx.arc(circle.cx,circle.cy,circle.r,0,TAU);ctx.stroke();ctx.restore();}
+ const points=state.points;if(!points.length) return;
+ ctx.save();ctx.beginPath();ctx.moveTo(points[0].x,points[0].y);
+ for(let i=1;i<points.length-1;i++){const p=points[i],next=points[i+1];ctx.quadraticCurveTo(p.x,p.y,(p.x+next.x)/2,(p.y+next.y)/2);}
+ const last=points[points.length-1];ctx.lineTo(last.x,last.y);
+ ctx.lineCap='round';ctx.lineJoin='round';
+ // 两层线条模拟月光，避免每帧昂贵的大面积 shadowBlur。
+ ctx.strokeStyle='rgba(245,207,143,.13)';ctx.lineWidth=10;ctx.stroke();
+ ctx.strokeStyle='#ffe8b9';ctx.lineWidth=2.6;ctx.stroke();ctx.restore();
+}
+function renderFrame(){
+ state.frame=0;
+ if(state.active!==null){state.duration=performance.now()-state.start;if(state.duration>SCORE_CONFIG.maxDurationMs) cancelDrawing('timeout');}
+ $('timer').textContent=t('time',{seconds:(state.duration/1000).toFixed(1)});
+ if(state.dirty){state.dirty=false;drawCanvas();}
+ if(state.active!==null&&!state.frame) state.frame=requestAnimationFrame(renderFrame);
+}
+function chineseScore(score){
+ const digits='零一二三四五六七八九',rounded=Math.round(clamp(score,0,100));
+ if(rounded===100) return '十成';
+ return `${digits[Math.floor(rounded/10)]}成${digits[rounded%10]}分`;
+}
+function evaluation(score){
+ if(score>=95) return t('eval95');
+ if(score>=90) return t('eval90');
+ if(score>=80) return t('eval80');
+ if(score>=70) return t('eval70');
+ if(score>=60) return t('eval60');
+ return t('eval0');
+}
+function updateResultUI(){
+ const result=state.result;
+ $('score').textContent=result.valid?result.score.toFixed(1):'—';
+ $('verdict').textContent=result.valid?evaluation(result.score):t(result.reasonKey);
+ const expression=currentLanguage==='en'?result.score.toFixed(1):chineseScore(result.score);
+ $('poem').textContent=result.valid?t('similarity',{score:expression}):t('invalidHint');
+ $('submit').disabled=!result.valid;
+ $('stageNote').textContent=result.valid?t('fitNote'):t('tryAgain');
+ if(result.valid&&!reducedMotion.matches){
+  const ripple=$('ripple'),{cx,cy,r}=result.circle;
+  ripple.style.setProperty('--x',`${cx}px`);ripple.style.setProperty('--y',`${cy}px`);ripple.style.setProperty('--diameter',`${r*2}px`);
+  ripple.classList.remove('play');void ripple.offsetWidth;ripple.classList.add('play');
+ }
+}
+
+// ---------- 昵称、弹窗与提交接口 ----------
+function cleanNickname(value){return value.normalize('NFC').replace(/[\u0000-\u001f\u007f-\u009f\u200b-\u200f\u202a-\u202e\u2060-\u206f\ufeff]/g,'').replace(/\s+/g,' ').trim();}
+function nicknameLength(value){return Array.from(value).reduce((n,ch)=>n+(ch.codePointAt(0)<=0x7f?1:2),0);}
+function escapeHTML(value){return value.replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+function openModal(){
+ if(!state.result?.valid||state.submitting||state.submitted) return;
+ $('modal').hidden=false;$('app').inert=true;$('nicknameError').textContent='';$('nickname').focus();
+}
+function closeModal(){
+ if(state.submitting) return;
+ $('modal').hidden=true;$('app').inert=false;
+ if(state.pendingResize){state.pendingResize=false;resizeCanvas();}
+ if($('submit').disabled) $('reset').focus();else $('submit').focus();
+}
+async function submitScore(event){
+ if(event) event.preventDefault();
+ if(state.submitting||state.submitted||!state.result?.valid) return;
+ const nickname=cleanNickname($('nickname').value);
+ if(!nickname||nicknameLength(nickname)>24){$('nicknameError').textContent=nickname?t('nicknameLong'):t('nicknameEmpty');$('nickname').focus();return;}
+ const result=state.result;
+ const payload={
+  eventId:'mid-autumn-2026',nickname:escapeHTML(nickname),score:result.score,
+  durationMs:result.durationMs,createdAt:result.createdAt,
+  canvasWidth:result.width,canvasHeight:result.height,
+  // 保留经过距离过滤的原始轨迹，服务器应恢复 x*width、y*height 再评分。
+  // 不可直接在非正方形画布的 [0,1]×[0,1] 坐标上拟合圆，否则会变椭圆。
+  normalizedPoints:state.points.map(p=>({x:clamp(p.x/result.width),y:clamp(p.y/result.height),t:Math.round(p.t)})),
+  metrics:{...result.metrics},algorithmVersion:SCORE_CONFIG.version,
+  submissionId:globalThis.crypto?.randomUUID?.()||`moon-${Date.now()}-${Math.random().toString(36).slice(2)}`
+ };
+ state.submitting=true;$('confirmSubmit').disabled=true;$('closeModal').disabled=true;$('submit').disabled=true;$('confirmSubmit').textContent=t('preparing');
+ try{
+  console.log('成绩已准备提交（演示，未发送）',payload);
+  // ===== 未来后端接口位置：替换演示等待，并由服务器重新计算成绩 =====
+  // const response = await fetch('/api/scores', {
+  //   method:'POST', headers:{'Content-Type':'application/json'},
+  //   body:JSON.stringify(payload)
+  // });
+  // if(!response.ok) throw new Error('提交失败，请稍后重试');
+  // const saved = await response.json(); // UI 应显示服务器确认的分数
+  // 昵称字段目前为 HTML 转义文本；后端应明确编码约定，避免二次转义。
+  // 排行榜仍必须使用 textContent 渲染解码后的纯文本，不拼接 innerHTML。
+  await new Promise(resolve=>setTimeout(resolve,250));
+  state.submitted=true;state.uiState='submitted';$('verdict').textContent=t('submitted');
+  $('poem').textContent=t('demo');
+  $('submit').textContent=t('submittedButton');
+ }catch(error){$('nicknameError').textContent=error.message||t('submitFailed');}
+ finally{
+  state.submitting=false;$('confirmSubmit').disabled=false;$('closeModal').disabled=false;$('confirmSubmit').textContent=t('prepare');
+  $('submit').disabled=state.submitted||!state.result?.valid;
+  if(state.submitted) closeModal();
+ }
+}
+$('reset').addEventListener('click',()=>resetGame());
+$('submit').addEventListener('click',openModal);
+$('closeModal').addEventListener('click',closeModal);
+$('nicknameForm').addEventListener('submit',submitScore);
+$('nickname').addEventListener('input',()=>{$('nicknameError').textContent=nicknameLength(cleanNickname($('nickname').value))>24?t('nicknameLongShort'):'';});
+$('modal').addEventListener('keydown',event=>{
+ if(event.key==='Escape'){event.preventDefault();closeModal();}
+ if(event.key==='Tab'){
+  const list=Array.from($('nicknameForm').querySelectorAll('input,button')).filter(el=>!el.disabled);
+  const first=list[0],last=list[list.length-1];
+  if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
+  else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+ }
+});
+$('languageSelect').addEventListener('change',event=>setLanguage(event.target.value));
+window.addEventListener('resize',resizeCanvas);
+window.addEventListener('orientationchange',()=>cancelDrawing('rotate'));
+if(window.ResizeObserver) new ResizeObserver(resizeCanvas).observe($('stage'));
+bindInputEvents();applyLanguage();resizeCanvas();
+
+// ---------- 无框架算法自检：控制台运行 runSelfTests()，或 URL 加 ?debug=1 ----------
+function runSelfTests(){
+ let seed=2026;
+ const random=()=>{seed=(1664525*seed+1013904223)>>>0;return seed/4294967296;};
+ const curve=(turns=1,rx=120,ry=120,jitter=0,spiral=0)=>Array.from({length:721},(_,i)=>{
+  const a=TAU*turns*i/720,noise=jitter*(.65*Math.sin(a*17)+.35*Math.sin(a*31)),r=1+spiral*i/720+noise;
+  return {x:240+rx*r*Math.cos(a),y:320+ry*r*Math.sin(a),t:i*5};
+ });
+ const cases={
+  '完美圆':curve(),'轻微抖动的圆':curve(1,120,120,.022),
+  '椭圆':curve(1,150,85),'半圆':curve(.5),'开口圆':curve(.80),
+  '两圈螺旋':curve(2,80,80,0,.65),
+  '直线':Array.from({length:120},(_,i)=>({x:80+i*2,y:100+i*3,t:i*10})),
+  '随机乱画':Array.from({length:180},(_,i)=>({x:80+random()*300,y:150+random()*350,t:i*10}))
+ };
+ const results=Object.entries(cases).map(([name,points])=>({name,...analyzeTrajectory(points,480,640)}));
+ console.table(results.map(r=>({轨迹:r.name,有效:r.valid,得分:r.valid?r.score:'不计分',提示:r.reasonKey?t(r.reasonKey):''})));
+ console.assert(results[0].valid&&results[0].score>=99,'完美圆应接近满分');
+ console.assert(results[1].valid&&results[1].score>90&&results[1].score<results[0].score,'轻微抖动应高分且低于完美圆');
+ console.assert(results[2].valid&&results[2].score<70,'明显椭圆应中低分');
+ console.assert(!results[3].valid,'半圆应无效');
+ console.assert(!results[4].valid||results[4].score<40,'开口圆应低分或无效');
+ console.assert(results.slice(5).every(r=>!r.valid||r.score<30),'多圈、直线和乱画应无效或低分');
+ return results;
+}
+if(SCORE_CONFIG.debug) runSelfTests();
+</script>
+</body>
+</html>
