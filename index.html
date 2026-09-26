@@ -8,24 +8,26 @@
 <style>
 :root{color-scheme:dark;--ink:#111b36;--gold:#efcf96;--white:#faf4e8;--muted:#b9c6dc}
 *{box-sizing:border-box} [hidden]{display:none!important}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;overscroll-behavior:none}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;overscroll-behavior:none;-webkit-text-size-adjust:100%}
 body{font-family:"Noto Serif CJK SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;color:var(--white);background:radial-gradient(ellipse at 80% 18%,#34426380,transparent 42%),linear-gradient(160deg,#0c152c,#1c2d49 70%,#30394c);-webkit-tap-highlight-color:transparent}
-button,input,select{font:inherit} button{min-height:48px;border-radius:15px;border:1px solid #c7b58f55;padding:10px 18px;cursor:pointer;color:var(--white);background:#ffffff09} button:disabled{opacity:.42;cursor:not-allowed} button:focus-visible,input:focus-visible{outline:3px solid #f6d393;outline-offset:4px}
+button,input,select{font:inherit} button{min-height:48px;border-radius:15px;border:1px solid #c7b58f55;padding:10px 18px;cursor:pointer;color:var(--white);background:#ffffff09} button:disabled{opacity:.42;cursor:not-allowed} button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #f6d393;outline-offset:4px}
 button.primary{background:linear-gradient(120deg,#f0d6a5,#dcb378);border:0;color:#263047;font-weight:700}
-.app{height:100vh;height:100svh;max-width:900px;margin:auto;display:flex;flex-direction:column;padding: max(14px,env(safe-area-inset-top)) 18px max(12px,env(safe-area-inset-bottom));position:relative;isolation:isolate}
+.app{height:100vh;height:100svh;max-width:900px;margin:auto;display:flex;flex-direction:column;padding:max(10px,env(safe-area-inset-top)) 18px max(10px,env(safe-area-inset-bottom));position:relative;isolation:isolate}
 .sky{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden;background-image:radial-gradient(circle at 14% 24%,#ffe4ac88 0 1px,transparent 1.7px),radial-gradient(circle at 78% 43%,#ffffff66 0 1px,transparent 1.7px),radial-gradient(circle at 34% 68%,#ffe4ac55 0 1px,transparent 1.7px);background-size:193px 251px,277px 219px,331px 307px}
 .sky:after{content:"";position:absolute;inset:auto -30% -90px;height:170px;border-radius:50% 50% 0 0;background:#0b192b66;transform:rotate(-7deg)}
-header{text-align:center;flex:none;position:relative;padding:0 0 10px}.language-switch{position:absolute;left:-4px;top:-7px;z-index:2}.language-switch select{min-height:32px;max-width:112px;border:1px solid #d6c49b42;border-radius:999px;background:#111d34cc;color:#e8dcc5;padding:4px 24px 4px 10px;font-size:11px;cursor:pointer}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.eyebrow{font-size:10px;letter-spacing:4px;color:var(--gold);margin:0 0 9px}h1{font-family:"Songti SC","STSong","SimSun",serif;font-size:clamp(25px,6vw,34px);font-weight:500;letter-spacing:5px;margin:0 0 9px}.subtitle{font-size:12px;color:#c7d0df;margin:0;letter-spacing:1px}
-.branch{position:absolute;right:-9px;top:-9px;width:75px;height:80px;opacity:.65;pointer-events:none}
+header{text-align:center;flex:none;position:relative;padding:30px 0 8px}.language-switch{position:absolute;left:0;top:0;z-index:2}.language-switch select{min-height:29px;max-width:112px;border:1px solid #d6c49b42;border-radius:999px;background:#111d34cc;color:#e8dcc5;padding:3px 22px 3px 9px;font-size:11px;cursor:pointer}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.eyebrow{position:absolute;right:4px;top:8px;font-size:9px;letter-spacing:2.5px;color:var(--gold);margin:0}h1{font-family:"Songti SC","STSong","SimSun",serif;font-size:clamp(24px,6vw,32px);font-weight:500;letter-spacing:3px;margin:0 0 5px}.subtitle{font-size:11px;color:#c7d0df;margin:0;letter-spacing:.3px;line-height:1.45}
+.branch{position:absolute;right:-9px;top:31px;width:56px;height:62px;opacity:.45;pointer-events:none}
 .stage{position:relative;flex:1;min-height:0;margin:0 -18px;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}
 canvas{width:100%;height:100%;display:block;touch-action:none;cursor:crosshair}
-.hint{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;pointer-events:none;color:#c4cddd;font-size:13px;letter-spacing:2px;text-align:center}.hint-moon{width:66px;height:66px;border:1px solid #eed5a13d;border-radius:50%;box-shadow:0 0 45px #e4d2ac0c,inset 0 0 30px #e4d2ac0a}.hint small{font-size:10px;color:#a8b6cc;letter-spacing:3px}
+.hint{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:0 24px;pointer-events:none;color:#c4cddd;font-size:12px;letter-spacing:.8px;text-align:center;line-height:1.5}.hint-moon{width:52px;height:52px;border:1px solid #eed5a13d;border-radius:50%;box-shadow:0 0 45px #e4d2ac0c,inset 0 0 30px #e4d2ac0a;flex:none}.hint small{font-size:10px;color:#a8b6cc;letter-spacing:1px}
 .stage-note{position:absolute;bottom:9px;left:0;right:0;text-align:center;pointer-events:none;color:var(--muted);font-size:11px;letter-spacing:1px}
-footer{flex:none;position:relative;border-top:1px solid #d8c6a126;padding-top:10px}.result-top{display:flex;align-items:center;justify-content:space-between;gap:10px}.label{font-size:11px;letter-spacing:2px;color:var(--gold)}.score{font-size:42px;line-height:1.15;font-weight:300;font-variant-numeric:tabular-nums}.score small{font-size:12px;color:var(--muted);margin-left:5px}.time{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}.copy{min-height:49px;padding:6px 0 8px}.verdict{font-size:13px;margin:0 0 5px;line-height:1.5}.poem{font-size:11px;line-height:1.5;color:#d4c4a6;margin:0}.actions{display:grid;grid-template-columns:1fr 1.35fr;gap:12px}.seal{text-align:center;font-size:9px;letter-spacing:3px;color:#aab8cf;margin-top:9px}
+footer{flex:none;position:relative;border-top:1px solid #d8c6a126;padding-top:8px}.result-top{display:flex;align-items:center;justify-content:space-between;gap:10px}.label{font-size:10px;letter-spacing:1px;color:var(--gold)}.score{font-size:35px;line-height:1.12;font-weight:300;font-variant-numeric:tabular-nums}.score small{font-size:11px;color:var(--muted);margin-left:5px}.time{font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums}.copy{min-height:43px;padding:4px 0 7px}.verdict{font-size:12px;margin:0 0 3px;line-height:1.4}.poem{font-size:10px;line-height:1.4;color:#d4c4a6;margin:0}.actions{display:grid;grid-template-columns:1fr 1.35fr;gap:10px}.seal{text-align:center;font-size:9px;letter-spacing:3px;color:#aab8cf;margin-top:9px}
 .ripple{position:absolute;left:var(--x,50%);top:var(--y,50%);width:var(--diameter,160px);height:var(--diameter,160px);border:1px solid #e7cd9880;border-radius:50%;pointer-events:none;opacity:0;transform:translate(-50%,-50%)}.ripple.play{animation:moonlight 850ms ease-out}@keyframes moonlight{0%{opacity:.6;transform:translate(-50%,-50%) scale(.8)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.4)}}
 .modal{position:fixed;inset:0;z-index:20;background:#060d21c9;display:flex;align-items:center;justify-content:center;padding:24px;overflow:auto}.dialog{width:min(100%,380px);padding:25px;background:#1c2b46;border:1px solid #efd4a54d;border-radius:22px;box-shadow:0 24px 90px #0006}.dialog h2{font-size:22px;font-weight:500;margin:0 0 10px}.dialog p,.dialog label{font-size:13px;line-height:1.7}.dialog p{color:var(--muted)}.dialog input{display:block;width:100%;min-height:48px;border:1px solid #a1aec566;border-radius:10px;background:#101d34;color:var(--white);padding:10px;margin:10px 0 5px;font-size:16px}.dialog .error{color:#ffceaa;min-height:24px;margin:8px 0}.dialog .actions{grid-template-columns:1fr 1fr}
-html[lang="zh-TW"] body{font-family:"Noto Serif CJK TC","Source Han Serif TC","Songti TC","STSong",serif}html[lang="en"] body{font-family:"Iowan Old Style","Baskerville","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif}html[lang="en"] h1{letter-spacing:2px;font-size:clamp(23px,5.5vw,32px)}html[lang="en"] .subtitle{letter-spacing:.3px}html[lang="en"] .seal{letter-spacing:.5px}html[lang="en"] .dialog .actions button{font-size:12px}
-@media(max-height:650px){.app{padding-top:max(8px,env(safe-area-inset-top))}.eyebrow,.seal{display:none}h1{font-size:25px;margin-bottom:5px}header{padding-bottom:5px}.score{font-size:32px}.copy{min-height:42px;padding:4px 0}.hint{gap:12px}.hint-moon{width:46px;height:46px}}
+.welcome{z-index:30}.welcome-card{width:min(100%,340px);padding:28px 22px;background:linear-gradient(160deg,#263552,#172640);border:1px solid #efd4a55e;border-radius:22px;box-shadow:0 24px 90px #0007;text-align:center}.welcome-mark{display:block;margin:0 auto 17px;width:44px;height:44px;border-radius:50%;background:#f7e4bb;box-shadow:0 0 28px #f4d69c77}.welcome-card h2{font-size:21px;font-weight:500;line-height:1.4;margin:0 0 7px}.welcome-card p{color:var(--muted);font-size:12px;margin:0 0 20px}.language-choices{display:grid;gap:9px}.language-choices button{width:100%;background:#ffffff0a;border-color:#d6c49b55;font-size:15px}.language-choices button:hover,.language-choices button:focus-visible{background:#e8cd9829}
+html[lang="zh-TW"] body{font-family:"Noto Serif CJK TC","Source Han Serif TC","Songti TC","STSong",serif}html[lang="en"] body{font-family:"Iowan Old Style","Baskerville","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif}html[lang="en"] h1{letter-spacing:.5px;font-size:clamp(23px,5.7vw,30px)}html[lang="en"] .subtitle{letter-spacing:0}html[lang="en"] .hint{letter-spacing:0}html[lang="en"] .seal{letter-spacing:.5px}html[lang="en"] .dialog .actions button{font-size:12px}
+@media(max-width:600px){.seal{display:none}.stage-note{font-size:10px;bottom:6px}.actions button{min-height:46px;padding:8px 10px;font-size:13px}}
+@media(max-height:650px){.app{padding-top:max(8px,env(safe-area-inset-top))}.eyebrow{display:none}h1{font-size:25px;margin-bottom:5px}header{padding-bottom:5px}.score{font-size:32px}.copy{min-height:42px;padding:4px 0}.hint{gap:10px}.hint-moon{width:44px;height:44px}}
 @media(orientation:landscape) and (max-height:540px){.app{display:grid;grid-template-columns:minmax(0,1fr) 270px;grid-template-rows:auto minmax(0,1fr);gap:8px 20px}header{grid-column:1 / 3}.stage{grid-column:1;grid-row:2;margin:0}footer{grid-column:2;grid-row:2;align-self:center}.subtitle{display:none}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 </style>
@@ -62,6 +64,18 @@ html[lang="zh-TW"] body{font-family:"Noto Serif CJK TC","Source Han Serif TC","S
   <div class="actions"><button id="closeModal" type="button">返回</button><button id="confirmSubmit" class="primary" type="submit">准备提交</button></div>
  </form>
 </div>
+<div class="modal welcome" id="welcome" hidden>
+ <div class="welcome-card" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle" aria-describedby="welcomeHelp">
+  <span class="welcome-mark" aria-hidden="true"></span>
+  <h2 id="welcomeTitle">选择语言 · 選擇語言<br>Choose your language</h2>
+  <p id="welcomeHelp">中秋画月 · Mid-Autumn Moon</p>
+  <div class="language-choices">
+   <button type="button" data-language="zh-CN" lang="zh-CN">简体中文</button>
+   <button type="button" data-language="zh-TW" lang="zh-TW">繁體中文</button>
+   <button type="button" data-language="en" lang="en">English</button>
+  </div>
+ </div>
+</div>
 <script>
 'use strict';
 // 算法版本、所有评分权重及阈值集中配置；调参后后端应同步版本。
@@ -90,7 +104,7 @@ const state={width:0,height:0,dpr:1,points:[],active:null,inputBlocked:false,sta
  result:null,frame:0,dirty:true,submitting:false,submitted:false,pendingResize:false,uiState:'ready'};
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
 
-// ---------- 三语界面：选择保存在本机，首次访问按浏览器语言推断 ----------
+// ---------- 三语界面：首次选择并保存，切换语言时清空当前挑战 ----------
 const I18N={
  'zh-CN':{
   languageLabel:'语言',stageLabel:'画月区域',title:'一笔画月挑战',subtitle:'在星空中，一笔画出属于你的中秋明月',canvasLabel:'用一根手指或鼠标，连续画出一轮圆月',canvasFallback:'你的浏览器不支持 Canvas，请使用较新的浏览器。',hintMain:'请用一根手指，一笔画出圆月',hintSub:'不必匆忙 · 圆满自有时',scoreLabel:'圆度得分',time:'本次用时 {seconds} 秒',reset:'重新画月',submit:'提交成绩',seal:'月圆人团圆 · 一笔寄相思',dialogTitle:'为这轮月，留个名字',nicknameHelp:'最多 12 个中文字符或 24 个普通字符；混合输入按长度折算。当前为提交演示。',nicknameLabel:'你的昵称',nicknamePlaceholder:'例如：追月的人',back:'返回',prepare:'准备提交',preparing:'准备中…',submittedButton:'已准备提交',
@@ -105,10 +119,10 @@ const I18N={
   eval95:'月滿無缺，堪稱畫月大師！',eval90:'一輪好月，幾近圓滿。',eval80:'月色正好，只差一縷圓滿。',eval70:'略有雲遮，但仍是一輪好月。',eval60:'像一輪被秋風吹歪的月亮。',eval0:'今夜月相奇特，不妨再畫一次。',similarity:'你畫出來的月，竟與中秋的月亮有{score}相似。',nicknameEmpty:'請先留下你的暱稱。',nicknameLong:'暱稱太長：最多 12 個中文字元或 24 個一般字元。',nicknameLongShort:'暱稱過長，請縮短一些。',submitFailed:'準備失敗，請重試。'
  },
  en:{
-  languageLabel:'Language',stageLabel:'Moon drawing area',title:'One-Stroke Moon Challenge',subtitle:'Draw your own Mid-Autumn moon across the night sky in one stroke',canvasLabel:'Draw a full moon in one continuous stroke with one finger or a mouse',canvasFallback:'Your browser does not support Canvas. Please use a newer browser.',hintMain:'Draw a full moon with one finger in a single stroke',hintSub:'Take your time · Wholeness comes in its own time',scoreLabel:'Roundness score',time:'Time: {seconds} s',reset:'Draw again',submit:'Submit score',seal:'Under the full moon, we gather · One stroke carries our thoughts',dialogTitle:'Give this moon a name',nicknameHelp:'Up to 12 CJK characters or 24 regular characters. Mixed input uses weighted length. Submission is currently a demo.',nicknameLabel:'Nickname',nicknamePlaceholder:'e.g. Moon Chaser',back:'Back',prepare:'Prepare submission',preparing:'Preparing…',submittedButton:'Ready to submit',
-  ready:'The moon awaits your first stroke.',scoreHint:'Time does not affect your score. Draw clockwise or counterclockwise.',stageReady:'One stroke · Release to reveal',drawing:'Moonlight is flowing from your fingertip…',stageDrawing:'Drawing · Release to reveal',cancelHint:'This attempt was not scored. Start a new stroke to try again.',stageInterrupted:'Touch interrupted · Please draw again',invalidHint:'This attempt was not scored. Draw a complete moon in one stroke.',fitNote:'Gold is your stroke · Blue dashes show the fitted circle',tryAgain:'Start a new stroke to try again',submitted:'Your score is ready to submit',demo:'Demo mode: the data was logged to the console and was not sent to the leaderboard.',
+  languageLabel:'Language',stageLabel:'Moon drawing area',title:'Draw the Moon',subtitle:'A Mid-Autumn challenge, one stroke at a time',canvasLabel:'Draw a full moon in one continuous stroke with one finger or a mouse',canvasFallback:'Your browser does not support Canvas. Please use a newer browser.',hintMain:'Draw a full moon in one stroke',hintSub:'Take your time',scoreLabel:'Roundness',time:'Time: {seconds} s',reset:'Try again',submit:'Submit score',seal:'One moon, many wishes',dialogTitle:'Name your moon',nicknameHelp:'Up to 12 CJK characters or 24 other characters. This is a demo; no score is sent yet.',nicknameLabel:'Nickname',nicknamePlaceholder:'e.g. Moon Chaser',back:'Back',prepare:'Submit score',preparing:'Preparing…',submittedButton:'Score ready',
+  ready:'Your moon is waiting.',scoreHint:'Take your time—speed does not affect your score.',stageReady:'One stroke · Lift to reveal',drawing:'Let the moon take shape…',stageDrawing:'Drawing · Lift to reveal',cancelHint:'No score this time. Start a fresh stroke to try again.',stageInterrupted:'Drawing interrupted · Try again',invalidHint:'No score this time. Draw the whole moon in one stroke.',fitNote:'Gold: your stroke · Blue: fitted circle',tryAgain:'Start a fresh stroke to try again',submitted:'Score ready to submit',demo:'Demo only: your score was logged locally, not sent to a leaderboard.',
   invalidFit:'We could not recognize this moon. Please try again.',smallMoon:'This moon is a little small. Please draw it larger.',fullMoon:'Please draw a complete moon in one stroke.',tooMany:'It looks like you drew more than one loop or reversed too often. Please try again.',notClosed:'This moon is still open. Try closing the circle.',messy:'The stroke is a little tangled. Draw one loop in a consistent direction.',badData:'The stroke data is invalid. Please draw again.',slowComplete:'Draw a complete moon a little more slowly.',tooShort:'The stroke is too short. Draw a larger, more complete moon.',line:'That looks more like a ray of moonlight. Please draw a full moon.',resize:'The canvas size changed. Please draw the moon again.',boundary:'Your finger left the canvas. Please draw the moon again.',tooLong:'That stroke was too long. Please draw the moon again.',multi:'Please draw with one finger only.',timeout:'That stroke took a while. Take a break and try again.',pointerCancel:'Touch was interrupted. Please draw again.',captureLost:'The touch connection was interrupted. Please draw again.',blur:'The page lost focus. Please draw again.',hidden:'The page changed or was hidden. Please draw again.',rotate:'The screen rotated. Please draw again.',
-  eval95:'A flawless full moon—you are a moon-drawing master!',eval90:'A beautiful moon, nearly perfect.',eval80:'Lovely moonlight, just a touch from perfect.',eval70:'A few passing clouds, but still a fine moon.',eval60:'A moon gently bent by the autumn wind.',eval0:'A curious moon tonight—why not try once more?',similarity:'Your moon is {score}% as round as the Mid-Autumn moon.',nicknameEmpty:'Please enter your nickname.',nicknameLong:'Nickname is too long: use up to 12 CJK characters or 24 regular characters.',nicknameLongShort:'Nickname is too long. Please shorten it.',submitFailed:'Could not prepare the submission. Please try again.'
+  eval95:'A full moon worthy of a festival night!',eval90:'Beautifully drawn—almost a perfect moon.',eval80:'A lovely moon, with a little character.',eval70:'A few clouds at the edges, but a fine moon.',eval60:'The autumn breeze gave your moon a wobble.',eval0:'A moon all your own. Give it another try!',similarity:'Your moon scored {score} out of 100 for roundness.',nicknameEmpty:'Please enter your nickname.',nicknameLong:'Nickname is too long: use up to 12 CJK characters or 24 other characters.',nicknameLongShort:'Nickname is too long. Please shorten it.',submitFailed:'Could not prepare the submission. Please try again.'
  }
 };
 function detectLanguage(){
@@ -121,9 +135,19 @@ function detectLanguage(){
 let currentLanguage=detectLanguage();
 function t(key,vars={}){let value=I18N[currentLanguage][key]??I18N['zh-CN'][key]??key;for(const [name,replacement] of Object.entries(vars)) value=value.replaceAll(`{${name}}`,replacement);return value;}
 function setLanguage(language){
- if(!I18N[language]) return;currentLanguage=language;
- try{localStorage.setItem('moon-language',language);}catch(_error){}
- applyLanguage();
+ if(!I18N[language]||state.submitting) return;
+ currentLanguage=language;
+ try{localStorage.setItem('moon-language',language);localStorage.setItem('moon-language-onboarded','1');}catch(_error){}
+ $('nickname').value='';$('nicknameError').textContent='';
+ resetGame();applyLanguage();resizeCanvas();
+ if(!$('welcome').hidden){$('welcome').hidden=true;$('app').inert=false;$('languageSelect').focus();}
+}
+function showWelcomeIfNeeded(){
+ let onboarded=false;
+ try{onboarded=localStorage.getItem('moon-language-onboarded')==='1';}catch(_error){}
+ if(onboarded) return;
+ $('welcome').hidden=false;$('app').inert=true;
+ $('welcome').querySelector('[data-language="'+currentLanguage+'"]').focus();
 }
 function applyLanguage(){
  document.documentElement.lang=currentLanguage;document.title=t('title');$('languageSelect').value=currentLanguage;
@@ -521,10 +545,17 @@ $('modal').addEventListener('keydown',event=>{
  }
 });
 $('languageSelect').addEventListener('change',event=>setLanguage(event.target.value));
+$('welcome').addEventListener('click',event=>{const button=event.target.closest('[data-language]');if(button) setLanguage(button.dataset.language);});
+$('welcome').addEventListener('keydown',event=>{
+ if(event.key!=='Tab') return;
+ const buttons=Array.from($('welcome').querySelectorAll('[data-language]'));
+ if(event.shiftKey&&document.activeElement===buttons[0]){event.preventDefault();buttons[buttons.length-1].focus();}
+ else if(!event.shiftKey&&document.activeElement===buttons[buttons.length-1]){event.preventDefault();buttons[0].focus();}
+});
 window.addEventListener('resize',resizeCanvas);
 window.addEventListener('orientationchange',()=>cancelDrawing('rotate'));
 if(window.ResizeObserver) new ResizeObserver(resizeCanvas).observe($('stage'));
-bindInputEvents();applyLanguage();resizeCanvas();
+bindInputEvents();applyLanguage();resizeCanvas();showWelcomeIfNeeded();
 
 // ---------- 无框架算法自检：控制台运行 runSelfTests()，或 URL 加 ?debug=1 ----------
 function runSelfTests(){
